@@ -2,8 +2,8 @@ import React from 'react'
 import { Navbar } from '../components/navbar'
 import SearchBar from '../components/SearchBar'
 import UserChatItem from '../components/userChatItem'
-import image from "../assets/image.png"
-import inshort from "../assets/inshot.mp4"
+import image from "image.png"
+import inshort from "inshort.mp4"
 import {UserListData} from "../constant/UserListData"
 
 // UserData;
