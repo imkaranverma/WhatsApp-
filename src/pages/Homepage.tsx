@@ -1,7 +1,7 @@
 import React from 'react'
-import { Navbar } from '../components/navbar'
+import { Navbar } from '../components/Navbar'
 import SearchBar from '../components/SearchBar'
-import UserChatItem from '../components/userChatItem'
+import UserChatItem from '../components/UserChatItem'
 import image from "image.png"
 import inshort from "inshort.mp4"
 import {UserListData} from "../constant/UserListData"

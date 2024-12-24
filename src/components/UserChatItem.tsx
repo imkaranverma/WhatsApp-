@@ -59,7 +59,7 @@ undefined
         </div>
         {
             userData?.unread !=0 && userData?.unread &&
-            <span className='size-5 bg-[#25d366] item-center place-items-center border rounded-xl text-white items-center flex justify-center'><Typography variant='overline'>{userData?.unread}</Typography></span>
+            <span className='size-5 bg-[#25d366] item-center place-items-center border rounded-xl text-white items-center flex justify-center'><Typography variant='overline'>{userData?.unread ? userData?.unread.toString() : ""}</Typography></span>
 
         }
     </div>
