@@ -1,0 +1,12 @@
+._ai01 {
+    position: relative;
+    z-index: 100;
+    box-sizing: border-box;
+    display: flex;
+    flex: none;
+    align-items: center;
+    height: var(--h-pane-subheader);
+    padding: 0 12px;
+    background-color: var(--search-input-container-background);
+    transition: box-shadow .18s ease-out, background-color .25s ease-out;
+}
