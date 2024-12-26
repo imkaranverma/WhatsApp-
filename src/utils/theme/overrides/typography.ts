@@ -91,11 +91,13 @@ export const typographyOverrides: TypographyOptions | ((palette: Palette) => Typ
     // textTransform: "uppercase"
   },
   caption: {
-    color: "#075E54 !important",
+    color: "white !important",
     // fontFamily: "Inter",
-    fontSize: "0.75rem",
-    fontStyle: "normal",
-    fontWeight: 500,
-    lineHeight: "166%" /* 1.245rem */
+    fontSize: "0.625rem",
+    fontStyle: "bold",
+    fontWeight: 800,
+    lineHeight: "157%" /* 1.5rem */,
+    // letterSpacing: "0.03125rem",
+    // textTransform: "uppercase"
   }
 };

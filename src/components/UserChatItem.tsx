@@ -11,7 +11,7 @@ interface userInterface {
     status: "Sent" | "Delivered" | "Recieved",
     unread: Number,
     icon: String | undefined,
-    date: String 
+    lastMessageDate: String 
 };
 const UserChatItem = ({userData} :{userData: userInterface}) => {
     // const Data: userInterface = {
@@ -37,7 +37,7 @@ undefined
     <div className='flex justify-between w-full pr-3'>
 
     <Typography variant='body1'>{userData?.name}</Typography>
-    <Typography variant='subtitle2'>{userData?.date}</Typography>
+    <Typography variant='subtitle2'>{userData?.lastMessageDate}</Typography>
     </div>
     <div className='flex gap-1 justify-between w-full pr-4 '>
         <div className='flex gap-1 items-center'>

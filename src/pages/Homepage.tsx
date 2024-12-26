@@ -2,9 +2,11 @@ import React from 'react'
 import { Navbar } from '../components/Navbar'
 import SearchBar from '../components/SearchBar'
 import UserChatItem from '../components/UserChatItem'
-import image from "image.png"
-import inshort from "inshort.mp4"
+import image from "../assets/image.png"
+import inshort from "../assets/inshot.mp4"
 import {UserListData} from "../constant/UserListData"
+import Footer from '../assets/Footer.jpg'
+import { Typography } from '@mui/material'
 
 // UserData;
 interface userInterface {
@@ -13,11 +15,23 @@ interface userInterface {
   status: "Sent" | "Delivered" | "Recieved",
   unread: Number,
   icon: String | undefined,
-  date: String 
+  lastMessageDate: String 
 };
+interface RootObject {
+  name: string;
+  icon: string;
+  message: string;
+  lastMessageDate: string;
+  status: "Sent" | "Delivered" | "Recieved";
+  unread: number | String;
+}
 
-const Data:userInterface[] = UserListData;
+// const Data:userInterface[] = UserListData;
 export const Homepage = () => {
+  const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+const Data = existingUsers;
+const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread> 0).length;
+// console.log(usersWithUnreadMessages);
   return (
     <>
      <div>
@@ -36,6 +50,13 @@ export const Homepage = () => {
     {/* <UserChatItem/>
     <UserChatItem/>
     <UserChatItem/> */}
+    <div className='absolute bottom-0 w-full'>
+{
+usersWithUnreadMessages && 
+    <span className='size-6 bg-[#25d366] item-center place-items-center border rounded-xl text-white items-center flex justify-center relative bottom-[-30px] left-16 z-30 '><Typography variant='caption' className=''>{usersWithUnreadMessages}</Typography></span>
+}
+  <img src={Footer} className='relative fixed '/>
+    </div>
      </div>
     </>
   )
