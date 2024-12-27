@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 interface userInterface {
   name: String,
   message: String,
-  status: "Sent" | "Delivered" | "Recieved",
+  status: "Sent" | "Delivered" | "Recieved" | "None",
   unread: Number,
   icon: String | undefined,
   lastMessageDate: String 
@@ -37,10 +37,6 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
      <div>
 
      <Navbar/> 
-     {/*
-    <SearchBar/> 
-     <img src={image} /> 
-     */}
     <video src={inshort} width={"100%"} autoPlay muted loop/>
 <div className="h-[24rem] overflow-y-scroll">
 
@@ -49,9 +45,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
       ))}
 
 </div>
-    {/* <UserChatItem/>
-    <UserChatItem/>
-    <UserChatItem/> */}
+
     <div className='absolute bottom-0 w-full'>
       <div className='w-full flex justify-end items-end pr-3 flex flex-col gap-2'>
 <div className='w-10 h-10 bg-slate-100 drop-shadow-lg p-1.5 mr-2 border rounded-xl'>

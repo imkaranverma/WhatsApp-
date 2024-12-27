@@ -1,7 +1,7 @@
 interface userInterface {
     name: String,
     message: String,
-    status: "Sent" | "Delivered" | "Recieved",
+    status: "Sent" | "Delivered" | "Recieved" | "none",
     unread: Number,
     icon: String | undefined,
     date: String 

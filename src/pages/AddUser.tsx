@@ -101,7 +101,7 @@ const AddUser = () => {
                           key={`status`}
                           name={`status`}
                           placeholder="Select Gender"
-                          options={[ "Sent" , "Recieved"  , "Delivered"]}
+                          options={[ "Sent" , "Recieved"  , "Delivered", "None"]}
                           multiple={false}
                           // onChange={(event, newValue: any) => {
                           //   methods.setValue<any>(`self.gender`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });
