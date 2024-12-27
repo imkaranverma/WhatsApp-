@@ -8,7 +8,7 @@ interface FormProviderInterface {
   onSubmit?: () => void;
 }
 
-export default function FormProvider<T>({ children, onSubmit, methods, className }: FormProviderInterface) {
+export default function FormProvider({ children, onSubmit, methods, className }: FormProviderInterface) {
   return (
     <Form {...methods}>
       <form onSubmit={onSubmit} className={className}>

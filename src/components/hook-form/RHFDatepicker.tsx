@@ -1,13 +1,13 @@
 // form
 import { useFormContext, Controller } from "react-hook-form";
 // @mui
-import { Box, FormControl, FormLabel, StandardTextFieldProps, TextField, TextFieldProps } from "@mui/material";
-import React from "react";
+import { Box,  FormLabel, StandardTextFieldProps } from "@mui/material";
+// import React from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider, DesktopDatePicker, DesktopDatePickerProps, TimePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider} from "@mui/x-date-pickers";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import dayjs, { Dayjs } from "dayjs";
-import { motion } from "framer-motion";
+import { Dayjs } from "dayjs";
+// import { motion } from "framer-motion";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 // ----------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ export default function RHFDatePicker({ name, helperText, multiline, minDate, ma
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error } }) => (
+      render={({ field, fieldState: { } }) => (
         <Box sx={{ mb: 2, mt: 1 }}>
           {!isFloating && <FormLabel>{other.label}</FormLabel>}
           <LocalizationProvider dateAdapter={AdapterDayjs}>

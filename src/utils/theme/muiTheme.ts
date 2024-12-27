@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import { typographyOverrides } from "./overrides/typography";
-import { paletteOverrides } from "./overrides/palette";
-import { componentsOverrides } from "./overrides/components";
+// import { paletteOverrides } from "./overrides/palette";
+// import { componentsOverrides } from "./overrides/components";
 
 const breakPointsOptions = {
   values: {
@@ -16,7 +16,7 @@ const breakPointsOptions = {
 export const muiTheme = createTheme({
   breakpoints: breakPointsOptions,
   typography: typographyOverrides,
-  palette: paletteOverrides,
+  // palette: paletteOverrides,
 
-  components: componentsOverrides
+  // components: componentsOverrides
 });

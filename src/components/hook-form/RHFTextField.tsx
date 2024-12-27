@@ -1,7 +1,7 @@
 // form
 import { useFormContext, Controller } from "react-hook-form";
 // @mui
-import { Box, FormLabel, InputAdornment, StandardTextFieldProps, TextField, TextFieldProps } from "@mui/material";
+import { Box, FormLabel, InputAdornment, StandardTextFieldProps, TextField } from "@mui/material";
 import React, { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import { motion } from "framer-motion";
@@ -26,7 +26,7 @@ export default function RHFTextField({ dataId, enablePriceFormatting = false, na
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error, isTouched } }) => (
+      render={({ field, fieldState: { error } }) => (
         <Box sx={{ mb: 2, mt: 1 }}>
           {!isFloating && <FormLabel>{other.label}</FormLabel>}
           <TextField

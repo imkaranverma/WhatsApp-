@@ -8,5 +8,9 @@ export default {
     extend: {},
   },
   plugins: [],
+  
+    "compilerOptions": {
+      "noUnusedLocals": false,
+    },
 }
 

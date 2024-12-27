@@ -1,7 +1,7 @@
 // form
 import { useFormContext, Controller } from "react-hook-form";
 // @mui
-import { Autocomplete, AutocompleteProps, Box, FormLabel, TextField } from "@mui/material";
+import { Autocomplete, Box, FormLabel, TextField } from "@mui/material";
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -26,7 +26,7 @@ export default function RHFAutocomplete({ name, onChange, placeholder, label, mu
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error, isTouched } }) => (
+      render={({ field, fieldState: { error } }) => (
         <Box sx={{ mb: 2, mt: 1 }}>
           {!isFloating && <FormLabel>{label}</FormLabel>}
           <Autocomplete

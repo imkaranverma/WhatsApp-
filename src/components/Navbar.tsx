@@ -11,7 +11,7 @@ import React from 'react'
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState<boolean>(false);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     setAnchorEl(!anchorEl);
   };
   const handleClose = () => {

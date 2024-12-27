@@ -1,8 +1,8 @@
-import React from 'react'
+// import React from 'react'
 import Avatar from '@mui/material/Avatar';
-import { deepOrange} from '@mui/material/colors';
+// import { deepOrange} from '@mui/material/colors';
 import { Typography } from '@mui/material';
-import Tick from 'Tick.png';
+// import Tick from 'Tick.png';
 // import { userData } from '../constant/UserListData';
 
 interface userInterface {
