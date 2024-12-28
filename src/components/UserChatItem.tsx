@@ -7,7 +7,7 @@ import { Typography } from '@mui/material';
 
 interface userInterface {
     name: String,
-    message: String,
+    message: String | any,
     status: "Sent" | "Delivered" | "Recieved" | "None",
     unread: Number,
     icon: String | undefined,
