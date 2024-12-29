@@ -36,18 +36,23 @@ export const Homepage = () => {
   const currMin = today.getMinutes();
 
 
-  const battery = Math.floor((Math.random() * 90) + 10);
+
+  const battery = Math.floor((Math.random() * 10) + 40);
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 const Data = existingUsers;
 const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread> 0).length;
 // console.log(usersWithUnreadMessages);
+
+Data.map((element: userInterface, index: number) => (
+  console.log("datte:" , new Date(element?.lastMessageDate).getTime())
+  ))
   return (
     <>
           <div className="h-10">
 
-<span className="z-20 relative top-1.5 left-4 text-sm color-[#4B4B4B] opacity-80">{currHr}:{currMin}
+<span className="z-20 relative top-[4px] left-4 text-sm color-[#4B4B4B] opacity-80">{currHr}:{currMin}
 </span>
-<span className="z-20 relative top-1.5 left-[298px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
+<span className="z-20 relative top-[4px] left-[290px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
 </span>
 <img className='top-[-25px] relative' src={status} />
 </div>
@@ -60,7 +65,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
 <div className="h-[32rem] overflow-y-scroll">
     <video src={inshort} width={"100%"} autoPlay muted loop/>
 
-    {Data.sort((a:any, b:any) => a.lastMessageDate - b.lastMessageDate).map((element: userInterface, index: number) => (
+    {Data.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime()).map((element: userInterface, index: number) => (
       <UserChatItem key={index} userData={element} index={index} />
       ))}
 
@@ -72,15 +77,15 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
       <img  src="https://static.whatsapp.net/rsrc.php/v4/ye/r/W2MDyeo0zkf.png"/>
   </div>
 
-      <div className='bg-[#1DAB61] w-14 h-14 border rounded-xl  flex justify-center align-center right-[-400] relative'>
-      <img src={floating} className='w-9 h-12 pointer-events-auto' onClick={() => {
+      <div className='bg-[#1DAB61] w-14 h-14 border rounded-2xl  flex justify-center align-center right-[-400] relative drop-shadow-lg'>
+      <img src={floating} className='w-10 h-[2.9rem] mt-1 pointer-events-auto py-1' onClick={() => {
         navigate("/adduser");
       }}/>
       </div>
       </div>
 {
 usersWithUnreadMessages != 0 && 
-    <span className='size-4 bg-[#1AAE62] item-center place-items-center rounded-xl text-white items-center flex justify-center relative bottom-[-27px] left-12 z-30 '><Typography variant='caption' className=''>{usersWithUnreadMessages}</Typography></span>
+    <span className='size-[0.9rem] bg-[#1AAE62] item-center place-items-center rounded-xl text-white items-center flex justify-center relative bottom-[-27px] left-[3.2rem] z-30 '><Typography variant='caption' className=''>{usersWithUnreadMessages}</Typography></span>
 }
   <img src={Footer} className='relative fixed '/>
     </div>

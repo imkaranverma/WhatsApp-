@@ -21,7 +21,7 @@ export const Navbar = () => {
     <>
     <div className='flex justify-between w-full px-2 my-2 pl-4'>
 
-    <Typography variant='h5' color='#075E54'>WhatsApp</Typography>
+    <Typography variant='h5' color='#1DAB61'>WhatsApp</Typography>
 
     <div className='flex gap-6'>
     <MdOutlineQrCodeScanner color='black' size={25}/>
