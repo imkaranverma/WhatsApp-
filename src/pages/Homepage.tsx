@@ -43,9 +43,9 @@ const Data = existingUsers;
 const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread> 0).length;
 // console.log(usersWithUnreadMessages);
 
-Data.map((element: userInterface, index: number) => (
-  console.log("datte:" , new Date(element?.lastMessageDate).getTime())
-  ))
+// Data.map((element: userInterface, index: number) => (
+//   console.log("datte:" , new Date(element?.lastMessageDate).getTime())
+//   ))
   return (
     <>
           <div className="h-10">
