@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import ReceivedMessage from "../components/ReceivedMessage"
-import SentMessage from "../components/SentMessage"
+import ReceivedMessage from "../components/ReceivedMessage";
+import SentMessage from "../components/SentMessage";
 import  "./Chats.css"
 import { Avatar } from "@mui/material";
 

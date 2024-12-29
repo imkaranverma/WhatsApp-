@@ -36,7 +36,7 @@ export const Homepage = () => {
   const currMin = today.getMinutes();
 
 
-  const battery = Math.floor((Math.random() * 97) + 10);
+  const battery = Math.floor((Math.random() * 90) + 10);
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 const Data = existingUsers;
 const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread> 0).length;
@@ -47,7 +47,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
 
 <span className="z-20 relative top-1.5 left-4 text-sm color-[#4B4B4B] opacity-80">{currHr}:{currMin}
 </span>
-<span className="z-20 relative top-1.5 left-[292px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
+<span className="z-20 relative top-1.5 left-[298px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
 </span>
 <img className='top-[-25px] relative' src={status} />
 </div>

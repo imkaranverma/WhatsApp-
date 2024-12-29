@@ -38,7 +38,7 @@ const SearchBar = () => {
                 </svg>
               </span>
             </div>
-            <div className="_ah_x _ai09 text-[15px] font-normal leading-5 text-[color:var(--filters-item-color)] absolute z-[100] h-5 overflow-hidden text-sm leading-5 text-[color:var(--input-placeholder)] text-ellipsis whitespace-nowrap pointer-events-none transition-opacity duration-[0.14s] ease-linear left-[65px] right-2.5 top-[7px]">
+            <div className="_ah_x _ai09 text-[15px] font-normal  absolute z-[100] h-5 overflow-hidden text-sm leading-5 text-[color:var(--input-placeholder)] text-ellipsis whitespace-nowrap pointer-events-none transition-opacity duration-[0.14s] ease-linear left-[65px] right-2.5 top-[7px]">
               <span aria-hidden="true" data-icon="search" className="">
                 <svg
                   viewBox="0 0 24 24"
