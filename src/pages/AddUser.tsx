@@ -5,27 +5,49 @@ import FormProvider from '../components/hook-form/FormProvider';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 const AddUser = () => {
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     formState: { errors },
-    //   } = useForm();
-    
-    //   type Inputs= {
-    //     name: String,
-    //     icon: String,
-    //     message: String,
-    //     // lastMessageDate: new Date().toISOString().split("T")[0],
-    //     status: String,
-    //     unread: Number,
-    //   }
-    const defaultValues= {
-            name: "String",
-            icon: "String",
-            message: "String",
+  // const todayString = new Date().toISOString();
+  const today = new Date();
+  console.log("today : " , today)
+
+  // var x;
+  const imageUpload = (e:any) => {
+    const file = e.target.files[0];
+    getBase64(file).then((base64:any) => {
+      // localStorage["fileBase64"] = base64;
+      methods.setValue("icon" , base64)
+      //console.debug("file stored",base64);
+    });
+
+    // var dataImage = localStorage.getItem("fileBase64");
+    // console.log(dataImage);
+    // var bannerImg = document.getElementById("tableBanner");
+    // console.log(bannerImg);
+    // bannerImg.src = "data:image/png;base64," + dataImage;
+    // document.body.style.background = `url(data:image/png;base64,${dataImage})`;
+    // x = (
+    //   <img
+    //     alt="no"
+    //     id="tableBanner"
+    //     src={"data:image/png;base64," + dataImage}
+    //   />
+    // );
+  };
+  const getBase64 = (file:any) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  };
+
+    const defaultValues:any= {
+            name: "",
+            icon: "",
+            message: "",
             lastMessageDate: new Date().toISOString().split("T")[0],
             status: "",
             unread: 0,
@@ -81,6 +103,12 @@ const AddUser = () => {
         <RHFTextField dataId="name"  name='name' placeholder="Enter user's name" label="Name"/>
 
         {/* Profile Photo */}
+        <input
+        type="file"
+        id="icon"
+        name="icon"
+        onChange={imageUpload}
+      />
         <RHFTextField dataId="icon"  name='icon' placeholder="Enter user's name (paste url)" label="Icon"/>
 
         {/* Message */}
@@ -89,10 +117,16 @@ const AddUser = () => {
         {/* Last Message Date */}
         {/* <RHFDatePicker type="date" name={`lastMessageDate`} placeholder="Enter lastMessageDate" label="lastMessageDate" /> */}
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker', 'DatePicker', 'DatePicker']}>
+      <DemoContainer components={['DateTimePicker']}>
         {/* <DatePicker label="disabled" disabled />
         <DatePicker label="readOnly" readOnly /> */}
-        <DatePicker label="Select Date" name="lastMessageDate" />
+        <DateTimePicker label="Select Date" name="lastMessageDate" onChange={(date:any) => {
+          // console.log("date: " , date?.$d);
+          // console.log("today: " ,today);
+          methods.setValue("lastMessageDate" , (
+            // date?.$d.toDateString() == today?.toDateString() ? (today?.getHours() + ":" + today?.getMinutes()) : 
+           date))
+          }}/>
       </DemoContainer>
     </LocalizationProvider>
         {/* Status */}
@@ -100,11 +134,11 @@ const AddUser = () => {
                           label="Select Status "
                           key={`status`}
                           name={`status`}
-                          placeholder="Select Gender"
+                          placeholder="Select Status"
                           options={[ "Sent" , "Recieved"  , "Delivered", "None"]}
                           multiple={false}
                           // onChange={(event, newValue: any) => {
-                          //   methods.setValue<any>(`self.gender`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });
+                          //   methods.setValue<any>(`self.Status`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });
                           // }}
                           {...{
                             //   loading: ...isLoading,

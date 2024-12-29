@@ -16,7 +16,7 @@ interface userInterface {
   status: "Sent" | "Delivered" | "Recieved" | "None",
   unread: Number,
   icon: String | undefined,
-  lastMessageDate: String 
+  lastMessageDate: String | null | any
 };
 // interface RootObject {
 //   name: string;
@@ -36,6 +36,7 @@ export const Homepage = () => {
   const currMin = today.getMinutes();
 
 
+  const battery = Math.floor((Math.random() * 97) + 10);
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 const Data = existingUsers;
 const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread> 0).length;
@@ -46,31 +47,33 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
 
 <span className="z-20 relative top-1.5 left-4 text-sm color-[#4B4B4B] opacity-80">{currHr}:{currMin}
 </span>
+<span className="z-20 relative top-1.5 left-[292px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
+</span>
 <img className='top-[-25px] relative' src={status} />
 </div>
-     <div>
+     <div className='absolute bottom-0 w-full bg-none top-8'>
       {/* <div className='h-[30px]'> */}
 
 {/* <Statusbar/> */}
       {/* </div> */}
      <Navbar/> 
+<div className="h-[32rem] overflow-y-scroll">
     <video src={inshort} width={"100%"} autoPlay muted loop/>
-<div className="h-[24rem] overflow-y-scroll">
 
-    {Data.map((element: userInterface, index: number) => (
-      <UserChatItem key={index} userData={element} />
+    {Data.sort((a:any, b:any) => a.lastMessageDate - b.lastMessageDate).map((element: userInterface, index: number) => (
+      <UserChatItem key={index} userData={element} index={index} />
       ))}
 
 </div>
 
-    <div className='absolute bottom-0 w-full'>
+    <div className='absolute bottom-0 w-full bg-none pointer-events-none'>
       <div className='w-full flex justify-end items-end pr-3 flex flex-col gap-2'>
 <div className='w-10 h-10 bg-slate-100 drop-shadow-lg p-1.5 mr-2 border rounded-xl'>
       <img  src="https://static.whatsapp.net/rsrc.php/v4/ye/r/W2MDyeo0zkf.png"/>
   </div>
 
       <div className='bg-[#1DAB61] w-14 h-14 border rounded-xl  flex justify-center align-center right-[-400] relative'>
-      <img src={floating} className='w-9 h-12' onClick={() => {
+      <img src={floating} className='w-9 h-12 pointer-events-auto' onClick={() => {
         navigate("/adduser");
       }}/>
       </div>

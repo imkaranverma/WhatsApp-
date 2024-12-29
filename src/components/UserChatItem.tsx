@@ -4,6 +4,8 @@ import Avatar from '@mui/material/Avatar';
 import { Typography } from '@mui/material';
 // import Tick from 'Tick.png';
 // import { userData } from '../constant/UserListData';
+import { useNavigate } from 'react-router';
+// import { NumericFormat } from 'react-number-format';
 
 interface userInterface {
     name: String,
@@ -11,9 +13,10 @@ interface userInterface {
     status: "Sent" | "Delivered" | "Recieved" | "None",
     unread: Number,
     icon: String | undefined,
-    lastMessageDate: String 
+    lastMessageDate: String | null  | any
 };
-const UserChatItem = ({userData} :{userData: userInterface}) => {
+const UserChatItem = ({userData , index} :{userData: userInterface; index: number}) => {
+    const Navigate = useNavigate();
     // const Data: userInterface = {
     //     name: "Karan",
     //     message: "This is message lorem23lksdfjnbvevny ewfiewfmn uwehidniewyidwewnweiuhwinexubygueiuqgeg",
@@ -22,22 +25,38 @@ const UserChatItem = ({userData} :{userData: userInterface}) => {
     //     icon: "A",
     //     date: "Yesterday"
     // }
+
+    var date = new Date(userData?.lastMessageDate);
+    var today = new Date();
+
+    const dataImage=  userData?.icon;
+    // console.log(dataImage);
+    // var bannerImg = document.getElementById("avatarIcon");
+    // console.log(bannerImg);
+   const Iconsrc = dataImage;
+
   return (
     <>
 
 
-<div className='flex my-2 pl-2'>
+<div className='flex my-2 pl-2' onClick={() => {Navigate("/edituser" , {state: {userData: userData , index: index}})}}>
     <div className='basis-2/12 flex justify-center'>
-<Avatar  sx={{ bgcolor: "#DFE5E7" , margin: "auto"}}>{
-// userData?.icon?.slice(0,1).toUpperCase()
-undefined
-}</Avatar>
+<Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
+    {/* { */}
+{/* // userData?.icon?.slice(0,1).toUpperCase()
+// undefined */}
+{/* }</Avatar> */}
     </div>
 <div className='flex flex-col w-full items-start'>
     <div className='flex justify-between w-full pr-3'>
 
     <Typography variant='body1'>{userData?.name}</Typography>
-    <Typography variant='subtitle2'>{userData?.lastMessageDate}</Typography>
+    <Typography variant='subtitle2'>{date?.toDateString() == today?.toDateString() ? 
+    (date?.getHours().toString().padStart(2,  "0") + ":" + date?.getMinutes().toString().padStart(2,  "0")) 
+    : 
+  (  date?.getFullYear() == today?.getFullYear() && date?.getMonth()  == today?.getMonth() && today?.getDate() - date?.getDate() == 1 ) ? 
+  "Yesterday" :
+    (date?.getDate() + "/" + (date?.getMonth() + 1) + "/" + date?.getFullYear().toString().substr(-2))}</Typography>
     </div>
     <div className='flex gap-1 justify-between w-full pr-4 '>
         <div className='flex gap-1 items-center'>
