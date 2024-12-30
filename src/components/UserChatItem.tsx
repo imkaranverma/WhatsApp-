@@ -41,8 +41,8 @@ console.log("index:" , index)
 
 
 <div className='flex my-2 pl-2' onClick={() => {Navigate("/edituser" , {state: {userData: userData , index: index}})}}>
-    <div className={`flex justify-center m-0 w-[55.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#25d366] rounded-full" : ""}`}>
-<Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
+    <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#25d366] rounded-full" : ""}`}>
+<Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", width: "42px", height: "42px"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
     </div>
 <div className='flex flex-col w-full items-start ml-2'>
     <div className='flex justify-between w-full pr-3'>
@@ -79,7 +79,7 @@ console.log("index:" , index)
         </div>
         {
             userData?.unread !=0 && userData?.unread &&
-            <span className='size-5 bg-[#00A884] item-center place-items-center border rounded-xl text-white items-center flex justify-center'><Typography variant='overline'>{userData?.unread ? userData?.unread.toString() : ""}</Typography></span>
+            <span className='size-5 bg-[#1EAA61] item-center place-items-center border rounded-xl text-white items-center flex justify-center'><Typography variant='overline'>{userData?.unread ? userData?.unread.toString() : ""}</Typography></span>
 
         }
     </div>

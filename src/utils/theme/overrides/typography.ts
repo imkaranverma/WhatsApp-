@@ -35,7 +35,7 @@ export const typographyOverrides: TypographyOptions | ((palette: Palette) => Typ
     lineHeight: "120%" /* 2.4rem */
   },
   h5: {
-    color: "#00A884 !important",
+    color: "#1EAA61 !important",
     fontSize: "1.5rem",
     fontStyle: "normal",
     fontWeight: 700,
