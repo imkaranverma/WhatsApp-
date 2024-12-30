@@ -51,7 +51,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
     <>
           <div className="h-10">
 
-<span className="z-20 relative top-[4px] left-4 text-sm color-[#4B4B4B] opacity-80">{currHr}:{currMin}
+<span className="z-20 relative top-[4px] left-4 text-sm color-[#4B4B4B] opacity-80">{currHr.toString().padStart(2, "0")}:{currMin.toString().padStart(2, "0")}
 </span>
 <span className="z-20 relative top-[4px] left-[293px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
 </span>
