@@ -95,7 +95,7 @@ export const typographyOverrides: TypographyOptions | ((palette: Palette) => Typ
     // fontFamily: "Inter",
     fontSize: "0.825rem",
     fontStyle: "bold",
-    fontWeight: 500,
+    fontWeight: 400,
     lineHeight: "157%" /* 1.5rem */,
     // letterSpacing: "0.03125rem",
     // textTransform: "uppercase"
