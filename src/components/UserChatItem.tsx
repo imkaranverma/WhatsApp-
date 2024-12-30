@@ -75,7 +75,7 @@ console.log("index:" , index)
        
    
         {/* <img src={Tick} width={10} height={6}/> */}
-    <Typography variant='subtitle1'>{userData?.message.substring(0, 32)} {userData?.message.length >= 32 && '...'}</Typography>
+    <Typography variant='subtitle1'>{userData?.message.substring(0, 40)} {userData?.message.length >= 40 && '...'}</Typography>
         </div>
         {
             userData?.unread !=0 && userData?.unread &&
