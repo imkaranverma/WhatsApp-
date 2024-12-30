@@ -53,7 +53,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
 
 <span className="z-20 relative top-[4px] left-4 text-sm color-[#4B4B4B] opacity-80">{currHr}:{currMin}
 </span>
-<span className="z-20 relative top-[4px] left-[290px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
+<span className="z-20 relative top-[4px] left-[295px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
 </span>
 <img className='top-[-25px] relative' src={status} />
 </div>
@@ -63,7 +63,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
 {/* <Statusbar/> */}
       {/* </div> */}
      <Navbar/> 
-<div className="h-[32rem] overflow-y-scroll">
+<div className="h-[35rem] overflow-y-scroll">
     <video src={inshort} width={"100%"} autoPlay muted loop/>
 
     {Data.map((element: userInterface, index: number) => (
@@ -86,7 +86,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
       </div>
 {
 usersWithUnreadMessages != 0 && 
-    <span className='size-[0.9rem] bg-[#1AAE62] item-center place-items-center rounded-xl text-white items-center flex justify-center relative bottom-[-27px] left-[3.2rem] z-30 w-fit px-1'><Typography variant='caption' className=''>{usersWithUnreadMessages}</Typography></span>
+    <span className='size-[1rem] bg-[#1AAE62] item-center place-items-center rounded-xl text-white items-center flex justify-center relative bottom-[-27px] left-[3.2rem] z-30 w-fit px-[0.30rem]'><Typography variant='caption' className=''>{usersWithUnreadMessages}</Typography></span>
 }
   <img src={Footer} className='relative fixed '/>
     </div>

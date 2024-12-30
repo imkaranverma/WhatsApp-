@@ -35,7 +35,7 @@ export const typographyOverrides: TypographyOptions | ((palette: Palette) => Typ
     lineHeight: "120%" /* 2.4rem */
   },
   h5: {
-    color: "#25D366 !important",
+    color: "#00A884 !important",
     fontSize: "1.5rem",
     fontStyle: "normal",
     fontWeight: 700,
@@ -59,9 +59,9 @@ export const typographyOverrides: TypographyOptions | ((palette: Palette) => Typ
   body2: {
     color: "#075E54 !important",
     // fontFamily: "Inter",
-    fontSize: "0.875rem",
+    fontSize: "0.675rem",
     fontStyle: "normal",
-    fontWeight: 400,
+    fontWeight: 500,
     lineHeight: "157%" /* 1.373rem */
   },
   subtitle1: {
@@ -93,9 +93,9 @@ export const typographyOverrides: TypographyOptions | ((palette: Palette) => Typ
   caption: {
     color: "white !important",
     // fontFamily: "Inter",
-    fontSize: "0.625rem",
+    fontSize: "0.825rem",
     fontStyle: "bold",
-    fontWeight: 800,
+    fontWeight: 500,
     lineHeight: "157%" /* 1.5rem */,
     // letterSpacing: "0.03125rem",
     // textTransform: "uppercase"
