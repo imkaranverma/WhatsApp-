@@ -51,6 +51,7 @@ const AddUser = () => {
             lastMessageDate: new Date().toISOString().split("T")[0],
             status: "",
             unread: 0,
+            story: "",
           }
     //   const {
     //     register,
@@ -63,10 +64,10 @@ const AddUser = () => {
       const onSubmit = (data:any) => {
         console.log("Submitted Data:", data);
         const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
-
+        const updatedData = {...data, lastMessageDate: new Date(data?.lastMessageDate.$d.getTime() + (5.5 * 60 * 60 * 1000)) } ;
         // Add the new user to the array
-        const updatedUsers = [...existingUsers, data];
-    
+        const updatedUsers = [...existingUsers, updatedData];
+        updatedUsers.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime());
         // Save the updated array back to local storage
         localStorage.setItem("users", JSON.stringify(updatedUsers));
     
@@ -136,6 +137,24 @@ const AddUser = () => {
                           name={`status`}
                           placeholder="Select Status"
                           options={[ "Sent" , "Recieved"  , "Delivered", "None"]}
+                          multiple={false}
+                          // onChange={(event, newValue: any) => {
+                          //   methods.setValue<any>(`self.Status`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });
+                          // }}
+                          {...{
+                            //   loading: ...isLoading,
+                            fullWidth: true,
+                            getOptionLabel: (option: any) => option ?? "",
+                            sx: { mb: 2 },
+                            isOptionEqualToValue: (option: any, value: any) => option === value
+                          }}
+                        />
+ <RHFAutocomplete
+                          label="Select Story "
+                          key={`story`}
+                          name={`story`}
+                          placeholder="Select Story from below options"
+                          options={[ "Seen" , "Unseen"  , "None"]}
                           multiple={false}
                           // onChange={(event, newValue: any) => {
                           //   methods.setValue<any>(`self.Status`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });

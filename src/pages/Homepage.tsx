@@ -16,7 +16,8 @@ interface userInterface {
   status: "Sent" | "Delivered" | "Recieved" | "None",
   unread: Number,
   icon: String | undefined,
-  lastMessageDate: String | null | any
+  lastMessageDate: String | null | any,
+  story: "Seen" | "Unseen"  | "None"
 };
 // interface RootObject {
 //   name: string;
@@ -65,7 +66,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
 <div className="h-[32rem] overflow-y-scroll">
     <video src={inshort} width={"100%"} autoPlay muted loop/>
 
-    {Data.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime()).map((element: userInterface, index: number) => (
+    {Data.map((element: userInterface, index: number) => (
       <UserChatItem key={index} userData={element} index={index} />
       ))}
 
@@ -85,7 +86,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
       </div>
 {
 usersWithUnreadMessages != 0 && 
-    <span className='size-[0.9rem] bg-[#1AAE62] item-center place-items-center rounded-xl text-white items-center flex justify-center relative bottom-[-27px] left-[3.2rem] z-30 '><Typography variant='caption' className=''>{usersWithUnreadMessages}</Typography></span>
+    <span className='size-[0.9rem] bg-[#1AAE62] item-center place-items-center rounded-xl text-white items-center flex justify-center relative bottom-[-27px] left-[3.2rem] z-30 w-fit px-1'><Typography variant='caption' className=''>{usersWithUnreadMessages}</Typography></span>
 }
   <img src={Footer} className='relative fixed '/>
     </div>

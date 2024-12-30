@@ -6,11 +6,11 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const EditUser = () => {
-  
+    const Navigate = useNavigate()
     const location = useLocation();
     let { userData , index} = location.state;
 console.log("state: " , userData , index);
@@ -18,9 +18,10 @@ console.log("state: " , userData , index);
               name: userData?.name,
               icon: userData?.icon,
               message: userData?.message,
-              lastMessageDate: new Date(userData?.lastMessageDate).toISOString().split("T")[0],
+              lastMessageDate: new Date(userData?.lastMessageDate),
               status: userData?.status,
               unread: userData?.unread,
+              story: userData?.story,
             }
 
             // const deleteUser = 
@@ -28,12 +29,15 @@ console.log("state: " , userData , index);
         const onSubmit = (data:any) => {
           console.log("Submitted Data:", data);
           const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-
+          //  const updatedData = {...data, lastMessageDate: new Date(data?.lastMessageDate.$d.getTime() + (5.5 * 60 * 60 * 1000)) } ;
+          //  console.log("updated data: ", updatedData)
           // Check if the index is valid and exists in the array
           if (existingUsers.length > 0 && existingUsers[index]) {
             // Update the user at the given index with the new data
             existingUsers[index] = data ;
             
+            existingUsers.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime());
+            console.log("existing user:", existingUsers , index)
             // Save the updated users array back to local storage
             localStorage.setItem('users', JSON.stringify(existingUsers));
         
@@ -45,6 +49,7 @@ console.log("state: " , userData , index);
           }
           console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
           alert("User Updated Successfully!");
+          Navigate("/");
         };
         const methods = useForm({
           // resolver: yupResolver(transactionSchema),
@@ -94,11 +99,11 @@ console.log("state: " , userData , index);
       {/* <DatePicker label="disabled" disabled />
       <DatePicker label="readOnly" readOnly /> */}
       <DateTimePicker label="Select Date" name="lastMessageDate" onChange={(date:any) => {
-        // console.log("date: " , date?.$d);
+        console.log("date: " , date);
         // console.log("today: " ,today);
         methods.setValue("lastMessageDate" , (
           // date?.$d.toDateString() == today?.toDateString() ? (today?.getHours() + ":" + today?.getMinutes()) : 
-         date))
+         new Date(date.$d.getTime() + (5.5 * 60 * 60 * 1000))))
         }}/>
     </DemoContainer>
   </LocalizationProvider>
@@ -109,6 +114,27 @@ console.log("state: " , userData , index);
                         name={`status`}
                         placeholder="Select Status"
                         options={[ "Sent" , "Recieved"  , "Delivered", "None"]}
+                        multiple={false}
+                        // onChange={(event, newValue: any) => {
+                        //   methods.setValue<any>(`self.Status`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });
+                        // }}
+                        {...{
+                          //   loading: ...isLoading,
+                          fullWidth: true,
+                          getOptionLabel: (option: any) => option ?? "",
+                          sx: { mb: 2 },
+                          isOptionEqualToValue: (option: any, value: any) => option === value
+                        }}
+                      />
+
+                      {/* Story */}
+
+                      <RHFAutocomplete
+                        label="Select Story "
+                        key={`story`}
+                        name={`story`}
+                        placeholder="Select Story"
+                        options={[ "Seen" , "Unseen"  , "None"]}
                         multiple={false}
                         // onChange={(event, newValue: any) => {
                         //   methods.setValue<any>(`self.Status`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });

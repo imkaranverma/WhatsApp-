@@ -13,7 +13,8 @@ interface userInterface {
     status: "Sent" | "Delivered" | "Recieved" | "None",
     unread: Number,
     icon: String | undefined,
-    lastMessageDate: String | null  | any
+    lastMessageDate: String | null  | any,
+    story: "Seen" | "Unseen"  | "None";
 };
 const UserChatItem = ({userData , index} :{userData: userInterface; index: number}) => {
     const Navigate = useNavigate();
@@ -28,7 +29,7 @@ const UserChatItem = ({userData , index} :{userData: userInterface; index: numbe
 
     var date = new Date(userData?.lastMessageDate);
     var today = new Date();
-
+console.log("index:" , index)
     const dataImage=  userData?.icon;
     // console.log(dataImage);
     // var bannerImg = document.getElementById("avatarIcon");
@@ -40,14 +41,10 @@ const UserChatItem = ({userData , index} :{userData: userInterface; index: numbe
 
 
 <div className='flex my-2 pl-2' onClick={() => {Navigate("/edituser" , {state: {userData: userData , index: index}})}}>
-    <div className='basis-2/12 flex justify-center'>
+    <div className={`flex justify-center m-0 w-[55.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#25d366] rounded-full" : ""}`}>
 <Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
-    {/* { */}
-{/* // userData?.icon?.slice(0,1).toUpperCase()
-// undefined */}
-{/* }</Avatar> */}
     </div>
-<div className='flex flex-col w-full items-start'>
+<div className='flex flex-col w-full items-start ml-2'>
     <div className='flex justify-between w-full pr-3'>
 
     <Typography variant='body1'>{userData?.name}</Typography>
