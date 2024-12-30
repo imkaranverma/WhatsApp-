@@ -53,7 +53,7 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
 
 <span className="z-20 relative top-[4px] left-4 text-sm color-[#4B4B4B] opacity-80">{currHr}:{currMin}
 </span>
-<span className="z-20 relative top-[4px] left-[292px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
+<span className="z-20 relative top-[4px] left-[291px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
 </span>
 <img className='top-[-25px] relative' src={status} />
 </div>
