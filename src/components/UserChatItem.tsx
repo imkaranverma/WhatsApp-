@@ -41,7 +41,7 @@ console.log("index:" , index)
 
 
 <div className='flex my-2 pl-2' onClick={() => {Navigate("/edituser" , {state: {userData: userData , index: index}})}}>
-    <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#25d366] rounded-full" : ""}`}>
+    <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#1EAA61] rounded-full" : ""}`}>
 <Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", width: "42px", height: "42px"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
     </div>
 <div className='flex flex-col w-full items-start ml-2'>
