@@ -7,6 +7,8 @@
     height: 100%;
     margin: 0;
     padding: 0;
+ 
+
   }
   
   body {
@@ -19,6 +21,8 @@
   }
   
   .page {
+    margin-top: 0px;
+    position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
@@ -72,12 +76,15 @@
   /* User Bar */
   
   .user-bar {
+    position: fixed;
+    top: 30px;
     height: 55px;
-    background: #005e54;
-    color: #fff;
-    padding: 0 8px;
+    background: white;
+    color: black;
+    padding: 10px 0 10px 8px;
     font-size: 24px;
-    position: relative;
+    width: 100%;
+    /* position: relative; */
     z-index: 1;
   }
   
@@ -96,7 +103,7 @@
   
   .user-bar .actions {
     float: right;
-    margin: 0 0 0 20px;
+    margin: 0 10px 0 20px;
   }
   
   .user-bar .actions.more {
@@ -120,14 +127,14 @@
   
   .user-bar .avatar img {
     border-radius: 50%;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    /* box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1); */
     display: block;
     width: 100%;
   }
   
   .user-bar .name {
-    font-size: 17px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 400;
     text-overflow: ellipsis;
     letter-spacing: 0.3px;
     margin: 0 0 0 8px;
@@ -140,14 +147,19 @@
     display: block;
     font-size: 13px;
     font-weight: 400;
-    letter-spacing: 0;
+    /* letter-spacing: 0; */
   }
   
   /* Conversation */
   
   .conversation {
-    height: calc(100% - 12px);
-    position: relative;
+    /* height: calc(100% - 40px);  */
+    /* //change above this to change bg-height */
+    background-attachment: fixed;
+    position: fixed;
+    width: 100%;
+    /* overflow-y: hidden; */
+    top: 80px;
     background: #efe7dd url("https://cloud.githubusercontent.com/assets/398893/15136779/4e765036-1639-11e6-9201-67e728e86f39.jpg") repeat;
     z-index: 0;
   }
@@ -168,9 +180,12 @@
   }
   
   .conversation .conversation-container {
-    height: calc(100% - 68px);
-    box-shadow: inset 0 10px 10px -10px #000000;
+    height: calc(100% - 680px);
+    /* box-shadow: inset 0 10px 10px -10px #000000; */
     overflow-x: hidden;
+    position: relative;
+    background-attachment: fixed;
+    /* overflow-y: none; */
     padding: 0 16px;
     margin-bottom: 5px;
   }
@@ -186,14 +201,16 @@
   .message {
     color: #000;
     clear: both;
-    line-height: 18px;
-    font-size: 15px;
-    padding: 8px;
+    line-height: 15px;
+    font-size: 18px;
+    padding: 4px;
+    padding-left: 8px;
+
     position: relative;
-    margin: 8px 0;
+    margin: 2px 0;
     max-width: 85%;
     word-wrap: break-word;
-    z-index: -1;
+    z-index: 0;
   }
   
   .message:after {
@@ -214,7 +231,7 @@
   
   .metadata .time {
     color: rgba(0, 0, 0, .45);
-    font-size: 11px;
+    font-size: 10px;
     display: inline-block;
   }
   
@@ -257,7 +274,7 @@
   }
   
   .message:first-child {
-    margin: 16px 0 8px;
+    /* margin: 16px 0 8px; */
   }
   
   .message.received {
@@ -281,13 +298,14 @@
     background: #e1ffc7;
     border-radius: 5px 0px 5px 5px;
     float: right;
+    white-space: pre-wrap;
   }
   
   .message.sent:after {
     border-width: 0px 0 10px 10px;
     border-color: transparent transparent transparent #e1ffc7;
     top: 0;
-    right: -10px;
+    right: -8px;
   }
   
   /* Compose */
@@ -295,6 +313,7 @@
   .conversation-compose {
     display: flex;
     flex-direction: row;
+    gap: 0;
     align-items: flex-end;
     overflow: hidden;
     height: 50px;
@@ -302,18 +321,29 @@
     z-index: 2;
   }
   
+  .conversation-compose{
+    background: #fff;
+    width: 85%;
+    /* margin-left: 10%; */
+    /* margin-right: 10%; */
+    border-radius: 30px 30px 30px 30px;
+  }
   .conversation-compose div,
   .conversation-compose input {
-    background: #fff;
+    background: none;
     height: 100%;
+    /* width: 150%; */
+    border-radius: 0px 20px 20px 0px;
+    padding-left: 30px;
   }
+
   
   .conversation-compose .emoji {
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
-    border-radius: 5px 0 0 5px;
+    border-radius: 50%;
     flex: 0 0 auto;
     margin-left: 8px;
     width: 48px;

@@ -7,8 +7,11 @@ import MenuItem from '@mui/material/MenuItem';
 
 
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<boolean>(false);
   const open = Boolean(anchorEl);
   const handleClick = () => {
@@ -26,7 +29,7 @@ export const Navbar = () => {
     <div className='flex gap-6'>
     <MdOutlineQrCodeScanner color='black' size={25}/>
     <MdOutlineCameraAlt color='black' size={25}/>
-    <BsThreeDotsVertical color='black' size={25} onClick={() => handleClick}/>
+    <BsThreeDotsVertical color='black' size={25} onClick={handleClick}/>
     {
       anchorEl && 
       <Menu
@@ -34,11 +37,12 @@ export const Navbar = () => {
       // anchorEl={anchorEl}
       open={open}
       onClose={handleClose}
+      className='top-0'
       MenuListProps={{
         'aria-labelledby': 'basic-button',
       }}
     >
-      <MenuItem onClick={handleClose}>Profile</MenuItem>
+      <MenuItem onClick={() => navigate("/battery")}>Battery</MenuItem>
       <MenuItem onClick={handleClose}>Add User</MenuItem>
       {/* <MenuItem onClick={handleClose}>Logout</MenuItem> */}
     </Menu>

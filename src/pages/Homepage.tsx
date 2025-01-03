@@ -7,6 +7,9 @@ import floating from "../assets/floating.jpg"
 import { useNavigate } from "react-router";
 // import Statusbar from '../components/Statusbar'
 import status from "../assets/status.jpg"
+// import Battery from './Battery';
+import BroadcastChatItem from '../components/BroadcastChatItem'
+import { useEffect, useState } from 'react'
 
 
 // UserData;
@@ -17,7 +20,9 @@ interface userInterface {
   unread: Number,
   icon: String | undefined,
   lastMessageDate: String | null | any,
-  story: "Seen" | "Unseen"  | "None"
+  story: "Seen" | "Unseen"  | "None",
+  __v: string,
+  _id: string,
 };
 // interface RootObject {
 //   name: string;
@@ -36,24 +41,48 @@ export const Homepage = () => {
   const currHr = today.getHours();
   const currMin = today.getMinutes();
 
+  const battery = JSON.parse(localStorage.getItem("battery") || "34");
 
+  // const battery = Math.floor((Math.random() * 10) + 40);
+ const [data , setData] = useState([]);
+  useEffect(() => {
 
-  const battery = Math.floor((Math.random() * 10) + 40);
-  const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
-const Data = existingUsers;
-const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread> 0).length;
+    async function apiCall ()  {
+      try{
+        const response = await fetch('https://whatsapp-backend-1707.onrender.com/users/list');
+        const json = await response.json();
+        // setData(json?.);
+        console.log("json: ", json?.data)
+        setData(json?.data);
+        if (!response.ok) {
+          throw new Error('Failed to create match.');
+        }
+  
+        // alert('');
+  
+      } catch(error) {
+  alert(error);
+      }
+    }
+    apiCall();
+
+  }, [])
+  // const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+const Data = data;
+const usersWithUnreadMessages = data.filter((user: any) => user.unread> 0).length;
 // console.log(usersWithUnreadMessages);
 
 // Data.map((element: userInterface, index: number) => (
 //   console.log("datte:" , new Date(element?.lastMessageDate).getTime())
 //   ))
+
   return (
     <>
           <div className="h-10">
 
 <span className="z-20 relative top-[4px] left-4 text-sm color-[#4B4B4B] opacity-80">{currHr.toString().padStart(2, "0")}:{currMin.toString().padStart(2, "0")}
 </span>
-<span className="z-20 relative top-[4px] left-[292px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery}%
+<span className="z-20 relative top-[4px] left-[292px] text-sm color-[#4B4B4B] opacity-80 text-end">{battery?.battery ?? "34"}%
 </span>
 <img className='top-[-25px] relative' src={status} />
 </div>
@@ -65,7 +94,10 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
      <Navbar/> 
 <div className="h-[35rem] overflow-y-scroll">
     <video src={inshort} width={"100%"} autoPlay muted loop/>
+{
 
+<BroadcastChatItem/>
+}
     {Data.map((element: userInterface, index: number) => (
       <UserChatItem key={index} userData={element} index={index} />
       ))}
@@ -75,7 +107,10 @@ const usersWithUnreadMessages = existingUsers.filter((user: any) => user.unread>
     <div className='absolute bottom-0 w-full bg-none pointer-events-none'>
       <div className='w-full flex justify-end items-end pr-3 flex flex-col gap-2'>
 <div className='w-10 h-10 bg-slate-100 drop-shadow-lg p-1.5 mr-2 border rounded-xl'>
-      <img  src="https://static.whatsapp.net/rsrc.php/v4/ye/r/W2MDyeo0zkf.png"/>
+      <img  className='pointer-events-auto' src="https://static.whatsapp.net/rsrc.php/v4/ye/r/W2MDyeo0zkf.png" 
+      onClick={() => {
+        navigate("/broadcast")
+      }}/>
   </div>
 
       <div className='bg-[#1DAB61] w-14 h-14 border rounded-2xl  flex justify-center align-center right-[-400] relative drop-shadow-lg'>

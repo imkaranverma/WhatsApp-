@@ -7,18 +7,20 @@ import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 // import { NumericFormat } from 'react-number-format';
 
+
+
 interface userInterface {
     name: String,
     message: String | any,
     status: "Sent" | "Delivered" | "Recieved" | "None",
     unread: Number,
     icon: String | undefined,
-    lastMessageDate?: String | null  | any,
-    story: "Seen" | "Unseen"  | "None",
-    __v: string,
-    _id: string,
+    // lastMessageDate?: String | null  | any,
+    story: "Seen" | "Unseen"  | "None";
+    _id: string;
+    __v: number | string,
 };
-const UserChatItem = ({userData , index} :{userData: userInterface; index: number}) => {
+const BroadcastUserList = ({userData , index} :{userData: userInterface; index: number}) => {
     const Navigate = useNavigate();
     // const Data: userInterface = {
     //     name: "Karan",
@@ -29,8 +31,8 @@ const UserChatItem = ({userData , index} :{userData: userInterface; index: numbe
     //     date: "Yesterday"
     // }
 
-    var date = new Date(userData?.lastMessageDate);
-    var today = new Date();
+    // var date = new Date(userData?.lastMessageDate);
+    // var today = new Date();
 console.log("index:" , index)
     const dataImage=  userData?.icon;
     // console.log(dataImage);
@@ -40,26 +42,48 @@ console.log("index:" , index)
 
   return (
     <>
+<div className='flex py-2 pl-2 bg-white' onClick={async () => {
+      // event.stopPropagation(); // Prevent parent handlers from interfering
+      // console.log("Clicked");
+      console.log("Clicked")
+      if(confirm("Do you want to delete this message: "))
+      try {
+        const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/delete', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"_id" : userData?._id})
+          });
 
+          if (!response.ok) {
+            throw new Error('Failed to delete User.');
+          }
+    
+          alert('User Deleted successfully.');
 
-<div className='flex my-5 pl-2' onClick={() => {Navigate("/edituser" , {state: {userData: userData , index: index}})}}>
+      } catch(error:any){
+           alert(error.message);
+      }
+
+    }}>
     <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#1EAA61] rounded-full" : ""}`}>
-<Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", width: "42px", height: "42px"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
+<Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", width: "38px", height: "38px"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
     </div>
-<div className='flex flex-col w-full items-start ml-2'>
+<div className='flex flex-col w-full items-start ml-2 bg-white gap-0'>
     <div className='flex justify-between w-full pr-3'>
 
-    <Typography variant='body1'>{userData?.name}</Typography>
-    <Typography variant='subtitle2'>{date?.toDateString() == today?.toDateString() ? 
+    <Typography variant='body2' >{userData?.name}</Typography>
+    {/* <Typography variant='subtitle2'>{date?.toDateString() == today?.toDateString() ? 
     (date?.getHours().toString().padStart(2,  "0") + ":" + date?.getMinutes().toString().padStart(2,  "0")) 
     : 
   (  date?.getFullYear() == today?.getFullYear() && date?.getMonth()  == today?.getMonth() && today?.getDate() - date?.getDate() == 1 ) ? 
   "Yesterday" :
-    (date?.getDate() + "/" + (date?.getMonth() + 1) + "/" + date?.getFullYear().toString().substr(-2))}</Typography>
+    (date?.getDate() + "/" + (date?.getMonth() + 1) + "/" + date?.getFullYear().toString().substr(-2))}</Typography> */}
     </div>
     <div className='flex gap-1 justify-between w-full pr-4 '>
         <div className='flex gap-1 items-center'>
-            {
+            {/* {
                 userData?.status === "Sent" ? 
   <span aria-hidden="false"  aria-label=" Sent " data-icon="msg-check" className="h-3">
             <svg viewBox="0 0 12 11" color='#BBC4CA' height="13" width="13" preserveAspectRatio="xMidYMid meet" className="" fill="none"><title>msg-check</title><path d="M11.1549 0.652832C11.0745 0.585124 10.9729 0.55127 10.8502 0.55127C10.7021 0.55127 10.5751 0.610514 10.4693 0.729004L4.28038 8.36523L1.87461 6.09277C1.8323 6.04622 1.78151 6.01025 1.72227 5.98486C1.66303 5.95947 1.60166 5.94678 1.53819 5.94678C1.407 5.94678 1.29275 5.99544 1.19541 6.09277L0.884379 6.40381C0.79128 6.49268 0.744731 6.60482 0.744731 6.74023C0.744731 6.87565 0.79128 6.98991 0.884379 7.08301L3.88047 10.0791C4.02859 10.2145 4.19574 10.2822 4.38194 10.2822C4.48773 10.2822 4.58929 10.259 4.68663 10.2124C4.78396 10.1659 4.86436 10.1003 4.92784 10.0156L11.5738 1.59863C11.6458 1.5013 11.6817 1.40186 11.6817 1.30029C11.6817 1.14372 11.6183 1.01888 11.4913 0.925781L11.1549 0.652832Z" fill="currentcolor"></path></svg>
@@ -73,7 +97,7 @@ console.log("index:" , index)
            
         :
         <>
-        </>}
+        </>} */}
        
    
         {/* <img src={Tick} width={10} height={6}/> */}
@@ -93,4 +117,4 @@ console.log("index:" , index)
   )
 }
 
-export default UserChatItem
+export default BroadcastUserList

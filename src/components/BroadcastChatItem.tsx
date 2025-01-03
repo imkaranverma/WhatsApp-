@@ -6,19 +6,18 @@ import { Typography } from '@mui/material';
 // import { userData } from '../constant/UserListData';
 import { useNavigate } from 'react-router';
 // import { NumericFormat } from 'react-number-format';
+import broadcastItem from "../assets/broadcastIcon.png";
 
-interface userInterface {
-    name: String,
-    message: String | any,
-    status: "Sent" | "Delivered" | "Recieved" | "None",
-    unread: Number,
-    icon: String | undefined,
-    lastMessageDate?: String | null  | any,
-    story: "Seen" | "Unseen"  | "None",
-    __v: string,
-    _id: string,
-};
-const UserChatItem = ({userData , index} :{userData: userInterface; index: number}) => {
+// interface userInterface {
+//     name: String,
+//     message: String | any,
+//     status: "Sent" | "Delivered" | "Recieved" | "None",
+//     unread: Number,
+//     icon: String | undefined,
+//     lastMessageDate: String | null  | any,
+//     story: "Seen" | "Unseen"  | "None";
+// };
+const BroadcastChatItem = () => {
     const Navigate = useNavigate();
     // const Data: userInterface = {
     //     name: "Karan",
@@ -29,27 +28,30 @@ const UserChatItem = ({userData , index} :{userData: userInterface; index: numbe
     //     date: "Yesterday"
     // }
 
-    var date = new Date(userData?.lastMessageDate);
+    const BroadcastName = JSON.parse(localStorage.getItem("broadcastName") || "[]");
+    const BroadcastMessage = JSON.parse(localStorage.getItem("broadcastMessages") || "[]");
+    console.log("message: ", BroadcastMessage);
+    const latestMessage = BroadcastMessage?.length >=1 ? BroadcastMessage[0]?.message : "You created a broadcast";
+    var date = new Date(BroadcastMessage[0]?.time);
     var today = new Date();
-console.log("index:" , index)
-    const dataImage=  userData?.icon;
+// console.log("index:" , index)
+    // const dataImage=  userData?.icon;
     // console.log(dataImage);
     // var bannerImg = document.getElementById("avatarIcon");
     // console.log(bannerImg);
-   const Iconsrc = dataImage;
+//    const Iconsrc = dataImage;
 
+if(BroadcastName.length !== 0 && BroadcastMessage.length !== 0)
   return (
     <>
-
-
-<div className='flex my-5 pl-2' onClick={() => {Navigate("/edituser" , {state: {userData: userData , index: index}})}}>
-    <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#1EAA61] rounded-full" : ""}`}>
-<Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", width: "42px", height: "42px"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
+<div className='flex my-5 pl-2' onClick={() => {Navigate("/broadcastchat" )}}>
+    <div className={`flex justify-center m-0 w-[58.5px]`}>
+<Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", padding: "0.5rem" ,width: "42px", height: "42px"}} src={broadcastItem}/>
     </div>
 <div className='flex flex-col w-full items-start ml-2'>
     <div className='flex justify-between w-full pr-3'>
 
-    <Typography variant='body1'>{userData?.name}</Typography>
+    <Typography variant='body1'>{BroadcastName}</Typography>
     <Typography variant='subtitle2'>{date?.toDateString() == today?.toDateString() ? 
     (date?.getHours().toString().padStart(2,  "0") + ":" + date?.getMinutes().toString().padStart(2,  "0")) 
     : 
@@ -59,7 +61,7 @@ console.log("index:" , index)
     </div>
     <div className='flex gap-1 justify-between w-full pr-4 '>
         <div className='flex gap-1 items-center'>
-            {
+            {/* {
                 userData?.status === "Sent" ? 
   <span aria-hidden="false"  aria-label=" Sent " data-icon="msg-check" className="h-3">
             <svg viewBox="0 0 12 11" color='#BBC4CA' height="13" width="13" preserveAspectRatio="xMidYMid meet" className="" fill="none"><title>msg-check</title><path d="M11.1549 0.652832C11.0745 0.585124 10.9729 0.55127 10.8502 0.55127C10.7021 0.55127 10.5751 0.610514 10.4693 0.729004L4.28038 8.36523L1.87461 6.09277C1.8323 6.04622 1.78151 6.01025 1.72227 5.98486C1.66303 5.95947 1.60166 5.94678 1.53819 5.94678C1.407 5.94678 1.29275 5.99544 1.19541 6.09277L0.884379 6.40381C0.79128 6.49268 0.744731 6.60482 0.744731 6.74023C0.744731 6.87565 0.79128 6.98991 0.884379 7.08301L3.88047 10.0791C4.02859 10.2145 4.19574 10.2822 4.38194 10.2822C4.48773 10.2822 4.58929 10.259 4.68663 10.2124C4.78396 10.1659 4.86436 10.1003 4.92784 10.0156L11.5738 1.59863C11.6458 1.5013 11.6817 1.40186 11.6817 1.30029C11.6817 1.14372 11.6183 1.01888 11.4913 0.925781L11.1549 0.652832Z" fill="currentcolor"></path></svg>
@@ -73,17 +75,17 @@ console.log("index:" , index)
            
         :
         <>
-        </>}
+        </>} */}
        
    
         {/* <img src={Tick} width={10} height={6}/> */}
-    <Typography variant='subtitle1'>{userData?.message.substring(0, 36)} {userData?.message.length >= 36 && '...'}</Typography>
+    <Typography variant='subtitle1'>{latestMessage?.substring(0, 36)} {latestMessage?.length >= 36 && '...'}</Typography>
         </div>
-        {
+        {/* {
             userData?.unread !=0 && userData?.unread &&
             <span className='size-5 bg-[#1EAA61] item-center place-items-center border rounded-xl text-white items-center flex justify-center'><Typography variant='overline'>{userData?.unread ? userData?.unread.toString() : ""}</Typography></span>
 
-        }
+        } */}
     </div>
 </div>
 
@@ -91,6 +93,9 @@ console.log("index:" , index)
 
 </>
   )
+  else return (
+    <></>
+  )
 }
 
-export default UserChatItem
+export default BroadcastChatItem

@@ -1,12 +1,12 @@
 import { useLocation } from "react-router-dom";
-import ReceivedMessage from "../components/receivedMessage";
-import SentMessage from "../components/sentMessage";
+// import ReceivedMessage from "../components/ReceivedMessage";
+// import SentMessage from "../components/SentMessage";
 import  "./Chats.css"
 import { Avatar } from "@mui/material";
 
 const Chats = () => {
     const location = useLocation();
-    let { userData } = location.state;
+    let { userData  } = location.state ?? "AWS";
     console.log("userData" , userData);
 
   return (
@@ -47,7 +47,7 @@ undefined
 }</Avatar>
               </div>
               <div className="name">
-                <span>{userData?.name}</span>
+                <span>{userData?.name ?? "AS"}</span>
                 <span className="status">online</span>
               </div>
               <div className="actions more">
@@ -62,8 +62,8 @@ undefined
             </div>
             <div className="conversation">
               <div className="conversation-container">
-                <SentMessage message="What happened last night?"/>
-                <ReceivedMessage message="You were drunk."/>
+                {/* <SentMessage message="What happened last night?"/> */}
+                {/* <ReceivedMessage message="You were drunk."/> */}
               </div>
               <form className="conversation-compose">
                 <div className="emoji">

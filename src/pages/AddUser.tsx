@@ -50,7 +50,7 @@ const AddUser = () => {
             message: "",
             lastMessageDate: new Date().toISOString().split("T")[0],
             status: "",
-            unread: 0,
+            unread: "",
             story: "",
           }
     //   const {
@@ -61,19 +61,38 @@ const AddUser = () => {
     //   } = useForm<Inputs>()
     //   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
 
-      const onSubmit = (data:any) => {
+      const onSubmit = async (data:any) => {
         console.log("Submitted Data:", data);
-        const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
-        const updatedData = {...data, lastMessageDate: new Date(data?.lastMessageDate.$d.getTime() + (5.5 * 60 * 60 * 1000)) } ;
-        // Add the new user to the array
-        const updatedUsers = [...existingUsers, updatedData];
-        updatedUsers.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime());
-        // Save the updated array back to local storage
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        // const updatedData = {...data, lastMessageDate: new Date(data?.lastMessageDate.$d.getTime() + (5.5 * 60 * 60 * 1000)) } ;
+
+        try {
+          const response = await fetch('https://whatsapp-backend-1707.onrender.com/users/create', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+              throw new Error('Failed to create match.');
+            }
+      
+            alert('Match created successfully.');
+
+        } catch(error:any){
+ alert(error.message);
+        }
+        // const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+        // // Add the new user to the array
+        // const updatedUsers = [...existingUsers, updatedData];
+        // updatedUsers.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime());
+        // // Save the updated array back to local storage
+        // localStorage.setItem("users", JSON.stringify(updatedUsers));
     
+        // // alert("User Added Successfully!");
+        // console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
         // alert("User Added Successfully!");
-        console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
-        alert("User Added Successfully!");
       };
       const methods = useForm({
         // resolver: yupResolver(transactionSchema),
@@ -91,16 +110,6 @@ const AddUser = () => {
 
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} >
         {/* Name */}
-        {/* <div style={{ marginBottom: "16px" }}>
-          <label>Name:</label>
-          <input
-            type="text"
-            {...register("name", { required: "Name is required" })}
-            placeholder="Enter user's name"
-            style={{ width: "100%", padding: "8px" }}
-          />
-          {errors.name && <span style={{ color: "red" }}>{errors.name.message}</span>}
-        </div> */}
         <RHFTextField dataId="name"  name='name' placeholder="Enter user's name" label="Name"/>
 
         {/* Profile Photo */}
@@ -116,11 +125,8 @@ const AddUser = () => {
         <RHFTextField dataId="message"  name='message' placeholder="Enter user's last message" label="message"/>
 
         {/* Last Message Date */}
-        {/* <RHFDatePicker type="date" name={`lastMessageDate`} placeholder="Enter lastMessageDate" label="lastMessageDate" /> */}
         <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DateTimePicker']}>
-        {/* <DatePicker label="disabled" disabled />
-        <DatePicker label="readOnly" readOnly /> */}
         <DateTimePicker label="Select Date" name="lastMessageDate" onChange={(date:any) => {
           // console.log("date: " , date?.$d);
           // console.log("today: " ,today);

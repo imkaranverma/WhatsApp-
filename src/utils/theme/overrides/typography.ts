@@ -57,12 +57,12 @@ export const typographyOverrides: TypographyOptions | ((palette: Palette) => Typ
     lineHeight: "150%" /* 1.5rem */
   },
   body2: {
-    color: "#075E54 !important",
+    color: "#000000 !important",
     // fontFamily: "Inter",
-    fontSize: "0.675rem",
+    fontSize: "1rem",
     fontStyle: "normal",
-    fontWeight: 500,
-    lineHeight: "157%" /* 1.373rem */
+    fontWeight: 400,
+    lineHeight: "150%"/* 1.373rem */
   },
   subtitle1: {
     color: "#3b4a54 !important",

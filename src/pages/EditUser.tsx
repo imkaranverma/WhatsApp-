@@ -22,34 +22,57 @@ console.log("state: " , userData , index);
               status: userData?.status,
               unread: userData?.unread,
               story: userData?.story,
+              _id: userData?._id,
+              __v: userData?.__v,
             }
 
             // const deleteUser = 
 
-        const onSubmit = (data:any) => {
+        const onSubmit = async (data:any) => {
           console.log("Submitted Data:", data);
-          const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-          //  const updatedData = {...data, lastMessageDate: new Date(data?.lastMessageDate.$d.getTime() + (5.5 * 60 * 60 * 1000)) } ;
-          //  console.log("updated data: ", updatedData)
-          // Check if the index is valid and exists in the array
-          if (existingUsers.length > 0 && existingUsers[index]) {
-            // Update the user at the given index with the new data
-            existingUsers[index] = data ;
-            
-            existingUsers.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime());
-            console.log("existing user:", existingUsers , index)
-            // Save the updated users array back to local storage
-            localStorage.setItem('users', JSON.stringify(existingUsers));
+
+          try {
+            const response = await fetch('https://whatsapp-backend-1707.onrender.com/users/edit', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+              });
+  
+              if (!response.ok) {
+                throw new Error('Failed to edit user.');
+              }
         
-            // Log the updated users
-            console.log("Updated Users: ", existingUsers);
-          } else {
-            // Handle the case where the index is invalid or user does not exist
-            alert("Invalid user index or no users found!");
-          }
-          console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
-          alert("User Updated Successfully!");
+              alert('User Edited successfully.');
           Navigate("/");
+          } catch(error:any){
+               alert(error.message);
+          }
+
+          //Disable this below code after api
+          // const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+          // //  const updatedData = {...data, lastMessageDate: new Date(data?.lastMessageDate.$d.getTime() + (5.5 * 60 * 60 * 1000)) } ;
+          // //  console.log("updated data: ", updatedData)
+          // // Check if the index is valid and exists in the array
+          // if (existingUsers.length > 0 && existingUsers[index]) {
+          //   // Update the user at the given index with the new data
+          //   existingUsers[index] = data ;
+            
+          //   existingUsers.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime());
+          //   console.log("existing user:", existingUsers , index)
+          //   // Save the updated users array back to local storage
+          //   localStorage.setItem('users', JSON.stringify(existingUsers));
+        
+          //   // Log the updated users
+          //   console.log("Updated Users: ", existingUsers);
+          // } else {
+          //   // Handle the case where the index is invalid or user does not exist
+          //   alert("Invalid user index or no users found!");
+          // }
+          // console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
+          // alert("User Updated Successfully!");
+          // Navigate("/");
         };
         const methods = useForm({
           // resolver: yupResolver(transactionSchema),
@@ -176,22 +199,43 @@ console.log("state: " , userData , index);
           borderRadius: "4px",
           cursor: "pointer",
         }}
-        onClick={() => {
-            const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-            if (existingUsers.length > 0 && existingUsers[index]) {
+        onClick={async () => {
 
-                existingUsers.splice(index , 1);
-                localStorage.setItem('users', JSON.stringify(existingUsers));
+          try {
+            const response = await fetch('https://whatsapp-backend-1707.onrender.com/users/delete', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"_id" : userData?._id})
+              });
+  
+              if (!response.ok) {
+                throw new Error('Failed to delete user.');
+              }
+        
+              alert('User Deleted successfully.');
+              Navigate("/");
+  
+          } catch(error:any){
+               alert(error.message);
+          }
+
+            // const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+            // if (existingUsers.length > 0 && existingUsers[index]) {
+
+            //     existingUsers.splice(index , 1);
+            //     localStorage.setItem('users', JSON.stringify(existingUsers));
     
                 
-                console.log("Updated Users Array: ", existingUsers);
+            //     console.log("Updated Users Array: ", existingUsers);
 
-            } else {
-                // Handle the case where the index is invalid or user does not exist
-                alert("Invalid user index or no users found!");
-              }
-              console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
-              alert("User Deleted Successfully!");
+            // } else {
+            //     // Handle the case where the index is invalid or user does not exist
+            //     alert("Invalid user index or no users found!");
+            //   }
+            //   console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
+            //   alert("User Deleted Successfully!");
         }}
       >
         Delete User

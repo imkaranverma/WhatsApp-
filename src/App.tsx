@@ -6,10 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddUser from './pages/AddUser';
 import Chats from './pages/Chats';
 import EditUser from './pages/EditUser';
+import Battery from './pages/Battery';
+import Broadcast from './pages/Broadcast';
+import BroadcastChat from './pages/BroadcastChat';
+import BroadcastInfo from './pages/BroadcastInfo';
+// import { useEffect, useState } from 'react';
 
 function App() {
-
-
+  
   return (
 <GlobalConfiguration>
 <ThemeWrapper>
@@ -21,6 +25,10 @@ function App() {
     <Route path="/adduser" element={<AddUser />} />
     <Route path="/edituser" element={<EditUser />} />
     <Route path="/chats" element={<Chats />} />
+    <Route path="/broadcast" element={<Broadcast />} />
+    <Route path="/battery" element={<Battery />} />
+    <Route path="/broadcastchat" element={<BroadcastChat />} />
+    <Route path="/broadcastinfo" element={<BroadcastInfo />} />
   </Routes>
     </BrowserRouter>
     </>

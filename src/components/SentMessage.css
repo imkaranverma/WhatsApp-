@@ -1,8 +1,8 @@
 .message {
     color: #000;
     clear: both;
-    line-height: 18px;
-    font-size: 15px;
+    line-height: 8px;
+    font-size: 8px;
     padding: 8px;
     position: relative;
     margin: 8px 0;
@@ -71,9 +71,9 @@
             transform: perspective(800px) rotateY(-179.9deg);
   }
   
-  .message:first-child {
+  /* .message:first-child {
     margin: 16px 0 8px;
-  }
+  } */
   
   .message.received {
     background: #fff;
