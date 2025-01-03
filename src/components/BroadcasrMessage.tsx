@@ -48,7 +48,7 @@ const BroadcastName = () => {
     updatedMessages.sort((a:any, b:any) => new Date(a?.MessageDate).getTime() - new Date(b?.MessageDate).getTime());    
     localStorage.setItem("broadcastMessages" , JSON.stringify(updatedMessages));
 
-    // alert("Message Added Successfully!");
+    alert("Message Added Successfully!");
   };
 
     const messageMethods = useForm({
