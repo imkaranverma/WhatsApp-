@@ -22,7 +22,9 @@ const BroadcastInfo = () => {
 
   const battery = JSON.parse(localStorage.getItem("battery") || "34");
 
-
+  const BroadcastName = JSON.parse(localStorage.getItem("broadcastName") || "{}");
+  const createdTime = new Date(new Date(BroadcastName?.createdTime).getTime() - (5.5 * 60 * 60 * 1000));
+  const localUserList = JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
   const [data , setData] = useState([]);
   useEffect(() => {
 
@@ -48,7 +50,8 @@ const BroadcastInfo = () => {
   }, [])
 
   console.log("data: ", data);
-    const users = JSON.parse(localStorage.getItem("broadcastUserList") || "[]")
+  const users = data;
+    // const users = JSON.parse(localStorage.getItem("broadcastUserList") || "[]")
   return (
     <>
         <div className="h-8 fixed z-10">
@@ -91,9 +94,9 @@ const BroadcastInfo = () => {
         <div className="w-full flex justify-center py-3 z-30 ">
           <Avatar src={broadcastItem} sx={{ bgcolor: "#DFE5E7" ,width: "6rem" , height: "6rem", padding: "1.2rem"}}/>
         </div>
-        <div className='w-full text-center text-xl pt-3 pb-2'>B2</div>
+        <div className='w-full text-center text-xl pt-3 pb-2'>{BroadcastName?.name}</div>
         <div className='w-full text-center text-base text-gray-700 py-0'>Broadcast List - {users?.length} recipients</div>
-        <div className='w-full text-center text-sm text-gray-700 pt-2 pb-5'><span className='bg-slate-100 w-fit px-2 py-1 rounded-md'>Created 31/12/24, 19:31</span></div>
+        <div className='w-full text-center text-sm text-gray-700 pt-2 pb-5'><span className='bg-slate-100 w-fit px-2 py-1 rounded-md'>Created {createdTime.getDate().toString().padStart(2, "0") + "/" + (createdTime?.getMonth() + 1).toString().padStart(2, "0")  + "/" + createdTime.getFullYear().toString().slice(2) + ", " + createdTime.getHours().toString().padStart(2, "0") + ":" + createdTime.getMinutes().toString().padStart(2, "0")}</span></div>
 
       </div>
       <div className='drop-shadow-md mb-2'>
@@ -102,11 +105,27 @@ const BroadcastInfo = () => {
         <div className="bg-white drop-shadow-md mb-2">
           <div className='w-full text-sm text-gray-500 font-medium pl-4 py-3 font-[#3b4a54]'>{users?.length} recipients</div>
 <img src={recipients}/>
+
+    {
+        localUserList.map((element:any , index:any)=> (
+            <BroadcastUserList userData={{
+                name: element?.name || "Unknown", 
+                message: element?.status || "wq", 
+                icon: element?.icon , 
+                status: "None", 
+                unread: 0 , 
+                _id: element?._id,
+                __v: element?.__v,
+                // lastMessageDate: null, 
+                story: "None" 
+              }}  index={index} />
+        ))
+    }
     {
         users.map((element:any , index:any)=> (
             <BroadcastUserList userData={{
                 name: element?.name || "Unknown", 
-                message: element?.statusMessage || "wq", 
+                message: element?.status || "wq", 
                 icon: element?.icon , 
                 status: "None", 
                 unread: 0 , 

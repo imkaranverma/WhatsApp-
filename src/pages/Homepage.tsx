@@ -67,9 +67,10 @@ export const Homepage = () => {
     apiCall();
 
   }, [])
-  // const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+  const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+  const LocalData = existingUsers;
 const Data = data;
-const usersWithUnreadMessages = data.filter((user: any) => user.unread> 0).length;
+const usersWithUnreadMessages = data.filter((user: any) => user.unread> 0).length + LocalData.filter((user: any) => user.unread> 0).length;
 // console.log(usersWithUnreadMessages);
 
 // Data.map((element: userInterface, index: number) => (
@@ -98,6 +99,9 @@ const usersWithUnreadMessages = data.filter((user: any) => user.unread> 0).lengt
 
 <BroadcastChatItem/>
 }
+    {LocalData.map((element: userInterface, index: number) => (
+      <UserChatItem key={index} userData={element} index={index} />
+      ))}
     {Data.map((element: userInterface, index: number) => (
       <UserChatItem key={index} userData={element} index={index} />
       ))}

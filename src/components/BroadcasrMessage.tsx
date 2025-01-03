@@ -23,29 +23,29 @@ const BroadcastName = () => {
   const onMessageSubmit = async (data:any) => {
     console.log("Submitted Data:", data);   
     
-    try {
-      const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastMessage/create', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
+//     try {
+//       const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastMessage/create', {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify(data)
+//         });
 
-        if (!response.ok) {
-          throw new Error('Failed to create Message.');
-        }
+//         if (!response.ok) {
+//           throw new Error('Failed to create Message.');
+//         }
   
-        alert('Message created successfully.');
+//         alert('Message created successfully.');
 
-    } catch(error:any){
-alert(error.message);
-    }
+//     } catch(error:any){
+// alert(error.message);
+//     }
 
 
     const existingMessages = JSON.parse(localStorage.getItem("broadcastMessages") || "[]");
     const updatedMessages = [ ...existingMessages , data] ;
-    updatedMessages.sort((a:any, b:any) => new Date(b?.time).getTime() - new Date(a?.time).getTime());    
+    updatedMessages.sort((a:any, b:any) => new Date(a?.MessageDate).getTime() - new Date(b?.MessageDate).getTime());    
     localStorage.setItem("broadcastMessages" , JSON.stringify(updatedMessages));
 
     // alert("Message Added Successfully!");
@@ -85,6 +85,24 @@ alert(error.message);
                           name={`status`}
                           placeholder="Select Status"
                           options={[ "Sent" , "Recieved"  , "Delivered", "None"]}
+                          multiple={false}
+                          // onChange={(event, newValue: any) => {
+                          //   methods.setValue<any>(`self.Status`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });
+                          // }}
+                          {...{
+                            //   loading: ...isLoading,
+                            fullWidth: true,
+                            getOptionLabel: (option: any) => option ?? "",
+                            sx: { mb: 2 },
+                            isOptionEqualToValue: (option: any, value: any) => option === value
+                          }}
+                        />
+  <RHFAutocomplete
+                          label="Select Type"
+                          key={`messageType`}
+                          name={`messageType`}
+                          placeholder="Select Message Type"
+                          options={[ "Sent" , "Info"]}
                           multiple={false}
                           // onChange={(event, newValue: any) => {
                           //   methods.setValue<any>(`self.Status`, newValue?.id, { shouldValidate: true, shouldDirty: false, shouldTouch: true });

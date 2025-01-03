@@ -45,8 +45,11 @@ console.log("index:" , index)
 <div className='flex py-2 pl-2 bg-white' onClick={async () => {
       // event.stopPropagation(); // Prevent parent handlers from interfering
       // console.log("Clicked");
-      console.log("Clicked")
-      if(confirm("Do you want to delete this message: "))
+    //   console.log("Clicked")
+    console.log("id: ", userData?._id);
+      if(userData?._id){
+      if(confirm("Do you want to delete this User: "))
+
       try {
         const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/delete', {
             method: 'POST',
@@ -65,7 +68,30 @@ console.log("index:" , index)
       } catch(error:any){
            alert(error.message);
       }
+    }
+    else {
+        console.log("LOCALL")
+        if(confirm("Do you want to delete this message: "))
+        {
 
+        
+          const existingUsers = JSON.parse(localStorage.getItem('broadcastUserList') || '[]');
+            if (existingUsers.length > 0 && existingUsers[index]) {
+
+                existingUsers.splice(index , 1);
+                localStorage.setItem('broadcastUserList', JSON.stringify(existingUsers));
+    
+                
+                console.log("Updated Users Array: ", existingUsers);
+
+            } else {
+                // Handle the case where the index is invalid or user does not exist
+                alert("Invalid user index or no users found!");
+              }
+            //   console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
+              alert("User Deleted Successfully!");
+            }
+    }
     }}>
     <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#1EAA61] rounded-full" : ""}`}>
 <Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", width: "38px", height: "38px"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>

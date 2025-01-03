@@ -1,4 +1,4 @@
-import "./SentMessage.css";
+// import "./SentMessage.css";
 
 
 const SentMessage = ({data} : {data: any}) => {

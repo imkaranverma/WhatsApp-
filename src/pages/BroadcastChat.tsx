@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { format, isYesterday, isToday } from "date-fns"; 
 import React from "react";
+import broadcastItem from "../assets/broadcastIcon.png";
 
 const BroadcastChat = () => {
     const Navigate = useNavigate();
@@ -20,33 +21,58 @@ const BroadcastChat = () => {
   
     const battery = JSON.parse(localStorage.getItem("battery") || "");
   
+  //   const [data , setData] = useState([]);
+  // useEffect(() => {
+
+  //   async function apiCall ()  {
+  //     try{
+  //       const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastMessage/list');
+  //       const json = await response.json();
+  //       // setData(json?.);
+  //       console.log("json: ", json?.data)
+  //       setData(json?.data);
+  //       if (!response.ok) {
+  //         throw new Error('failed to fetch messages.');
+  //       }
+  
+  //       // alert('');
+  
+  //     } catch(error) {
+  // alert(error);
+  //     }
+  //   }
+  //   apiCall();
+
+  // }, [])
+
+  // const Messages: any = data;
+    const Messages:any = JSON.parse(localStorage.getItem("broadcastMessages") || "[]");
+    const BroadcastName = JSON.parse(localStorage.getItem("broadcastName") || "{}");
+
+    const localUserList = JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
     const [data , setData] = useState([]);
-  useEffect(() => {
-
-    async function apiCall ()  {
-      try{
-        const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastMessage/list');
-        const json = await response.json();
-        // setData(json?.);
-        console.log("json: ", json?.data)
-        setData(json?.data);
-        if (!response.ok) {
-          throw new Error('failed to fetch messages.');
+    useEffect(() => {
+  
+      async function apiCall ()  {
+        try{
+          const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/list');
+          const json = await response.json();
+          // setData(json?.);
+          console.log("json: ", json?.data)
+          setData(json?.data);
+          if (!response.ok) {
+            throw new Error('Failed to load users.');
+          }
+    
+          // alert('');
+    
+        } catch(error) {
+    alert(error);
         }
-  
-        // alert('');
-  
-      } catch(error) {
-  alert(error);
       }
-    }
-    apiCall();
-
-  }, [])
-
+      apiCall();
   
-    const Messages:any = data;
-
+    }, [])
 
     console.log("message: ", Messages)
   return (
@@ -85,20 +111,24 @@ const BroadcastChat = () => {
           <div className="chat">
             <div className="chat-container">
               <div className="user-bar" onClick={() => Navigate("/broadcastinfo")}>
-                <div className="back" >
+                <div className="back" 
+                // onClick={() => Navigate(-1)}
+                >
                 <IoMdArrowBack />
                 </div>
                 <div className="avatar">
                     
                   {/* <img src="" alt="Avatar" /> */}
-                  <Avatar  sx={{ bgcolor: "#DFE5E7" , margin: "auto" , width: "35px" , height: "35px"}}>{
-  // userData?.icon?.slice(0,1).toUpperCase()
-  undefined
-  }</Avatar>
+                  <Avatar  sx={{ bgcolor: "#DFE5E7" , margin: "auto" , width: "35px" , height: "35px" , padding: "0.3rem"}} src={broadcastItem}/>
                 </div>
                 <div className="name">
-                  <span>{"AS"}</span>
-                  <span className="status">online</span>
+                  <span>{BroadcastName?.name}</span>
+                  <span className="status">{
+  [...localUserList, ...data]
+    .map((element: any) => element?.name)
+    .filter((name) => name) // Ensure names are not null or undefined
+    .join(", ")
+}</span>
                 </div>
                 <div className="actions more">
                   <i className="zmdi zmdi-more-vert" />
@@ -127,7 +157,7 @@ const BroadcastChat = () => {
                             {showDateLabel && (
                                 <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
                                    
-                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-3">
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-2">
                                      {isToday(currentDate)
                                         ? "Today"
                                         : isYesterday(currentDate)
@@ -136,7 +166,136 @@ const BroadcastChat = () => {
                                         </span>
                                 </div>
                             )}
-                            <SentMessage data={element} />
+                            {
+                              element?.messageType == "Sent" ?
+                              <SentMessage data={element} /> :
+                              <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
+                                   
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-1">
+                                     {element?.message}
+                                        </span>
+                                </div>
+                            }
+                        </React.Fragment>
+                            )
+                        }
+
+                        )
+                    }
+                    {
+                        Messages.map((element:any, index:any) => {
+                          const currentDate = new Date(element?.MessageDate); 
+                          const previousDate =
+                              index > 0 ? new Date(Messages[index - 1]?.MessageDate) : null;
+          
+                          const showDateLabel =
+                              !previousDate || currentDate.toDateString() !== previousDate.toDateString();
+
+                              
+                          return (
+                            <React.Fragment key={element.id}> 
+                            {showDateLabel && (
+                                <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
+                                   
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-2">
+                                     {isToday(currentDate)
+                                        ? "Today"
+                                        : isYesterday(currentDate)
+                                        ? "Yesterday"
+                                        : format(currentDate, "dd MMMM yyyy")}
+                                        </span>
+                                </div>
+                            )}
+                            {
+                              element?.messageType == "Sent" ?
+                              <SentMessage data={element} /> :
+                              <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
+                                   
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-1">
+                                     {element?.message}
+                                        </span>
+                                </div>
+                            }
+                        </React.Fragment>
+                            )
+                        }
+
+                        )
+                    }
+                    {
+                        Messages.map((element:any, index:any) => {
+                          const currentDate = new Date(element?.MessageDate); 
+                          const previousDate =
+                              index > 0 ? new Date(Messages[index - 1]?.MessageDate) : null;
+          
+                          const showDateLabel =
+                              !previousDate || currentDate.toDateString() !== previousDate.toDateString();
+
+                              
+                          return (
+                            <React.Fragment key={element.id}> 
+                            {showDateLabel && (
+                                <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
+                                   
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-2">
+                                     {isToday(currentDate)
+                                        ? "Today"
+                                        : isYesterday(currentDate)
+                                        ? "Yesterday"
+                                        : format(currentDate, "dd MMMM yyyy")}
+                                        </span>
+                                </div>
+                            )}
+                            {
+                              element?.messageType == "Sent" ?
+                              <SentMessage data={element} /> :
+                              <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
+                                   
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-1">
+                                     {element?.message}
+                                        </span>
+                                </div>
+                            }
+                        </React.Fragment>
+                            )
+                        }
+
+                        )
+                    }
+                    {
+                        Messages.map((element:any, index:any) => {
+                          const currentDate = new Date(element?.MessageDate); 
+                          const previousDate =
+                              index > 0 ? new Date(Messages[index - 1]?.MessageDate) : null;
+          
+                          const showDateLabel =
+                              !previousDate || currentDate.toDateString() !== previousDate.toDateString();
+
+                              
+                          return (
+                            <React.Fragment key={element.id}> 
+                            {showDateLabel && (
+                                <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
+                                   
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-2">
+                                     {isToday(currentDate)
+                                        ? "Today"
+                                        : isYesterday(currentDate)
+                                        ? "Yesterday"
+                                        : format(currentDate, "dd MMMM yyyy")}
+                                        </span>
+                                </div>
+                            )}
+                            {
+                              element?.messageType == "Sent" ?
+                              <SentMessage data={element} /> :
+                              <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
+                                   
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-1">
+                                     {element?.message}
+                                        </span>
+                                </div>
+                            }
                         </React.Fragment>
                             )
                         }

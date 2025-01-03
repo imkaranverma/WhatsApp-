@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
 import FormProvider from '../components/hook-form/FormProvider';
 import RHFTextField from '../components/hook-form/RHFTextField';
-import BroadcastName from '../components/BroadcastName';
-import BroadcasrMessage from '../components/BroadcasrMessage';
-import UserListLocalStorage from '../components/UserListLocalStorage';
-import { Typography } from '@mui/material';
+// import BroadcastName from '../components/BroadcastName';
+// import BroadcasrMessage from '../components/BroadcasrMessage';
 
-const Broadcast = () => {
 
+const UserListLocalStorage = () => {
+
+    
     const imageUpload = (e:any) => {
         const file = e.target.files[0];
         getBase64(file).then((base64:any) => {
@@ -53,31 +53,31 @@ const Broadcast = () => {
       const onSubmit = async (data:any) => {
         console.log("Submitted Data:", data);
 
-        try {
-          const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/create', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-            });
+//         try {
+//           const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/create', {
+//               method: 'POST',
+//               headers: {
+//                 'Content-Type': 'application/json'
+//               },
+//               body: JSON.stringify(data)
+//             });
 
-            if (!response.ok) {
-              throw new Error('Failed to create user.');
-            }
+//             if (!response.ok) {
+//               throw new Error('Failed to create user.');
+//             }
       
-            alert('User created successfully.');
+//             alert('User created successfully.');
 
-        } catch(error:any){
- alert(error.message);
-        }
+//         } catch(error:any){
+//  alert(error.message);
+//         }
 
 
        const existingBroadcast:any =  JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
         var updatedBroadcast:any = [...existingBroadcast , data];            
         localStorage.setItem("broadcastUserList" , JSON.stringify(updatedBroadcast));
 
-        // alert("Battery Changed Successfully!");
+        alert("Battery Changed Successfully!");
       };
 
       
@@ -90,11 +90,9 @@ const Broadcast = () => {
         // formState: { isSubmitting, isDirty, dirtyFields, isValid }
       } = methods;
 
+
   return (
     <div>
-<BroadcastName/>
-
-
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} >
       <RHFTextField dataId="name"  name='name' placeholder="Enter name" label="Name"/>
       <input
@@ -123,14 +121,8 @@ const Broadcast = () => {
           Submit
         </button>
       </FormProvider>
-
-<Typography variant='h6'>
-LOCALLY FORM SUBMISSION
-</Typography>
-<UserListLocalStorage/>
-<BroadcasrMessage/>
     </div>
   )
 }
 
-export default Broadcast
+export default UserListLocalStorage

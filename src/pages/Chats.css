@@ -135,12 +135,13 @@
   .user-bar .name {
     font-size: 15px;
     font-weight: 400;
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
     letter-spacing: 0.3px;
     margin: 0 0 0 8px;
     overflow: hidden;
     white-space: nowrap;
-    width: 110px;
+    text-overflow: ellipsis;
+    width: 220px;
   }
   
   .user-bar .status {
@@ -201,8 +202,8 @@
   .message {
     color: #000;
     clear: both;
-    line-height: 15px;
-    font-size: 18px;
+    line-height: 11px;
+    font-size: 11px;
     padding: 4px;
     padding-left: 8px;
 
@@ -454,6 +455,6 @@
       height: calc(100vh - 55px);
     }
     .conversation .conversation-container {
-      height: calc(100vh - 120px);
+      height: calc(100vh - 140px);
     }
   }
