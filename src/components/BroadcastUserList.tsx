@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { Typography } from '@mui/material';
 // import Tick from 'Tick.png';
 // import { userData } from '../constant/UserListData';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 // import { NumericFormat } from 'react-number-format';
 
 
@@ -21,7 +21,7 @@ interface userInterface {
     __v: number | string,
 };
 const BroadcastUserList = ({userData , index} :{userData: userInterface; index: number}) => {
-    const Navigate = useNavigate();
+    // const Navigate = useNavigate();
     // const Data: userInterface = {
     //     name: "Karan",
     //     message: "This is message lorem23lksdfjnbvevny ewfiewfmn uwehidniewyidwewnweiuhwinexubygueiuqgeg",

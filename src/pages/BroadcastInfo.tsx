@@ -47,6 +47,7 @@ const BroadcastInfo = () => {
 
   }, [])
 
+  console.log("data: ", data);
     const users = JSON.parse(localStorage.getItem("broadcastUserList") || "[]")
   return (
     <>
