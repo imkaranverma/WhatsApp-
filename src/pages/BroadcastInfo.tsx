@@ -28,7 +28,7 @@ const BroadcastInfo = () => {
 
     async function apiCall ()  {
       try{
-        const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastuser/list');
+        const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/list');
         const json = await response.json();
         // setData(json?.);
         console.log("json: ", json?.data)
