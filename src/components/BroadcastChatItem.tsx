@@ -41,7 +41,7 @@ const BroadcastChatItem = () => {
     // console.log(bannerImg);
 //    const Iconsrc = dataImage;
 
-if(BroadcastName.length !== 0 && BroadcastMessage.length !== 0)
+// if(BroadcastName.length !== 0 && BroadcastMessage.length !== 0)
   return (
     <>
 <div className='flex my-5 pl-2' onClick={() => {Navigate("/broadcastchat" )}}>
@@ -93,9 +93,9 @@ if(BroadcastName.length !== 0 && BroadcastMessage.length !== 0)
 
 </>
   )
-  else return (
-    <></>
-  )
+//   else return (
+//     <></>
+//   )
 }
 
 export default BroadcastChatItem

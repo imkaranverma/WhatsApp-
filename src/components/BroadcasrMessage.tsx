@@ -43,10 +43,10 @@ alert(error.message);
     }
 
 
-    // const existingMessages = JSON.parse(localStorage.getItem("broadcastMessages") || "[]");
-    // const updatedMessages = [ ...existingMessages , data] ;
-    // updatedMessages.sort((a:any, b:any) => new Date(b?.time).getTime() - new Date(a?.time).getTime());    
-    // localStorage.setItem("broadcastMessages" , JSON.stringify(updatedMessages));
+    const existingMessages = JSON.parse(localStorage.getItem("broadcastMessages") || "[]");
+    const updatedMessages = [ ...existingMessages , data] ;
+    updatedMessages.sort((a:any, b:any) => new Date(b?.time).getTime() - new Date(a?.time).getTime());    
+    localStorage.setItem("broadcastMessages" , JSON.stringify(updatedMessages));
 
     // alert("Message Added Successfully!");
   };

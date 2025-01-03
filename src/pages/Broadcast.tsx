@@ -71,9 +71,9 @@ const Broadcast = () => {
         }
 
 
-      //  const existingBroadcast:any =  JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
-      //   var updatedBroadcast:any = [...existingBroadcast , data];            
-      //   localStorage.setItem("broadcastUserList" , JSON.stringify(updatedBroadcast));
+       const existingBroadcast:any =  JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
+        var updatedBroadcast:any = [...existingBroadcast , data];            
+        localStorage.setItem("broadcastUserList" , JSON.stringify(updatedBroadcast));
 
         // alert("Battery Changed Successfully!");
       };
