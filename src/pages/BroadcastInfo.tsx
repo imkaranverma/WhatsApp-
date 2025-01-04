@@ -72,7 +72,7 @@ const BroadcastInfo = () => {
 </span>
 <img className='top-[-25px] relative' src={status} />
 </div>
-    <div className='bg-slate-200 h-[100vh] relative top-10'>
+    <div className='bg-[#f7f8fa] h-[100vh] relative top-10'>
       <RevealOnScroll>
       <div className="w-full h-[3rem] bg-white fixed z-10 top-8">
 

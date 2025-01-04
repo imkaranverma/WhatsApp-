@@ -456,6 +456,6 @@
       height: calc(100vh - 55px);
     }
     .conversation .conversation-container {
-      height: calc(100vh - 140px);
+      height: calc(100vh - 180px);
     }
   }

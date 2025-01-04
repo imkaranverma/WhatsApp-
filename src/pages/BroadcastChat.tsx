@@ -256,9 +256,9 @@ const BroadcastChat = () => {
                   />
                  
                 </form> */}
-                <div className="w-full px-2 flex fixed bottom-4">
-                    <div className="INPUTBOX bg-white rounded-2xl w-[87%] py-0.5">
-                        <div className="bg-white px-2 rounded-xl h-9 "><img src={sticker} className=" "/></div>
+                <div className="w-full pl-1 pr-0 flex fixed bottom-2">
+                    <div className="INPUTBOX bg-white rounded-full w-[87%] py-0.5">
+                        <div className="bg-white px-2 rounded-2xl h-9 "><img src={sticker} className=" "/></div>
 
                     </div>
                     <div className="SENDICON h-10 w-10 bg-[#1DAB61] rounded-3xl m-auto flex justify-center items-center">
