@@ -474,7 +474,7 @@
     left: 44px;
     top: 17%;
     animation-name: blink;
-    animation-duration: 1000ms;
+    animation-duration: 600ms;
     animation-iteration-count: infinite;
     opacity: 1;
 }
