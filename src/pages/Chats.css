@@ -461,3 +461,30 @@
       height: calc(100vh - 190px);
     }
   }
+
+  /* .cursor {
+    position: relative;
+    height: none;
+} */
+.INPUTBOX i {
+    position: absolute;
+    width: 2px;
+    height: 55%;
+    background-color: #1DAB61;
+    left: 44px;
+    top: 17%;
+    animation-name: blink;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    opacity: 1;
+}
+
+.INPUTBOX input:focus + i {
+    display: none;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+

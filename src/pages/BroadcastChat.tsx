@@ -14,6 +14,7 @@ import React from "react";
 import broadcastItem from "../assets/broadcastIcon.png";
 import ElasticScroll from "../components/ElasticScroll";
 import { motion } from "framer-motion";
+// import "./blinking.css";
 
 const BroadcastChat = () => {
     const Navigate = useNavigate();
@@ -261,6 +262,10 @@ const BroadcastChat = () => {
                 </form> */}
                 <div className="w-full pl-1 pr-0 flex fixed bottom-2">
                     <div className="INPUTBOX bg-white rounded-full w-[87%] py-0.5">
+                    {/* <div className="cursor"> */}
+{/* <input type="text" className="rq-form-element" /> */}
+<i></i>
+{/* </div> */}
                         <div className="bg-white px-2 rounded-2xl h-9 "><img src={sticker} className=" "/></div>
 
                     </div>
