@@ -7,6 +7,7 @@ import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 // import { NumericFormat } from 'react-number-format';
 import broadcastItem from "../assets/broadcastIcon.png";
+import pin from "../assets/pin.png";
 
 // interface userInterface {
 //     name: String,
@@ -79,13 +80,10 @@ const BroadcastChatItem = () => {
        
    
         {/* <img src={Tick} width={10} height={6}/> */}
-    <Typography variant='subtitle1'>{latestMessage?.substring(0, 36)} {latestMessage?.length >= 36 && '...'}</Typography>
+    <Typography variant='subtitle1'>{latestMessage?.substring(0, 35)} {latestMessage?.length >= 35 && '...'}</Typography>
         </div>
-        {/* {
-            userData?.unread !=0 && userData?.unread &&
-            <span className='size-5 bg-[#1EAA61] item-center place-items-center border rounded-xl text-white items-center flex justify-center'><Typography variant='overline'>{userData?.unread ? userData?.unread.toString() : ""}</Typography></span>
-
-        } */}
+        <span ><img src={pin} className='h-6'/></span>
+        {/* <span aria-hidden="true" data-icon="pinned2" className=""><svg height="15" width="13" preserveAspectRatio="xMidYMid meet" className=""><title>pinned2</title><path fill="currentColor" d="M12.074 4.21 8.7 8.232l.116 4.233a.4.4 0 0 1-.657.318L.43 6.297a.4.4 0 0 1 .199-.702l4.196-.622L8.196.957a.63.63 0 0 1 .887-.078l2.914 2.445a.63.63 0 0 1 .077.887ZM1.294 14.229a.713.713 0 0 1-1.09-.915l2.674-3.64 1.536 1.288-3.12 3.267Z"></path></svg></span> */}
     </div>
 </div>
 
