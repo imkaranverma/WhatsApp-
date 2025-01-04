@@ -12,8 +12,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 const EditUser = () => {
     const Navigate = useNavigate()
     const location = useLocation();
-    let { userData , index , type} = location.state;
-console.log("state: " , userData , index);
+    console.log("location.state",location.state)
+    let { userData , index, type } = location.state;
+console.log("state: " ,type, userData , index);
       const defaultValues:any= {
               name: userData?.name,
               icon: userData?.icon,

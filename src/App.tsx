@@ -24,7 +24,7 @@ function App() {
             <CSSTransition  timeout={2000} classNames="scroll"> */}
               <AnimatePresence mode="wait">
 
-  <Routes location={location} key={location.pathname}>
+  <Routes>
     <Route path="/" element={<Homepage />} />
     <Route path="/adduser" element={<AddUser />} />
     <Route path="/edituser" element={<EditUser />} />
