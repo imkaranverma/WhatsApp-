@@ -32,7 +32,7 @@ const BroadcastChatItem = () => {
     const BroadcastMessage = JSON.parse(localStorage.getItem("broadcastMessages") || "[]");
     console.log("message: ", BroadcastMessage);
     const latestMessage = BroadcastMessage?.length >=1 ? BroadcastMessage[BroadcastMessage?.length - 1 ]?.message : "You created a broadcast";
-    var date = new Date(BroadcastMessage[BroadcastMessage?.length - 1]?.MessageDate);
+    var date = new Date(new Date(BroadcastMessage[BroadcastMessage?.length - 1]?.MessageDate).getTime() - (5.5 * 60 * 60 * 1000));
     var today = new Date();
 // console.log("index:" , index)
     // const dataImage=  userData?.icon;

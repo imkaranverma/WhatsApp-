@@ -30,7 +30,7 @@ const UserChatItem = ({userData , index, type} :{userData: userInterface; index:
     //     date: "Yesterday"
     // }
 
-    var date = new Date(userData?.lastMessageDate);
+    var date = new Date(new Date(userData?.lastMessageDate).getTime() - (5.5 * 60 * 60 * 1000));
     var today = new Date();
 console.log("index:" , index)
     const dataImage=  userData?.icon;
@@ -49,7 +49,7 @@ console.log("index:" , index)
 
 
 <div className='flex my-5 pl-2' onClick={handleClick}>
-    <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#1EAA61] rounded-full" : ""}`}>
+    <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#40c574] rounded-full" : ""}`}>
 <Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", width: "42px", height: "42px"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
     </div>
 <div className='flex flex-col w-full items-start ml-2'>

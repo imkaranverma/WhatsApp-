@@ -157,6 +157,9 @@ const BroadcastChat = () => {
                     {
                         Messages.map((element:any, index:any) => {
                           const currentDate = new Date(element?.MessageDate); 
+                          // const currentDate = new Date(new Date(element?.MessageDate).getTime() - (5.5 * 60 * 60 * 1000)); 
+                          console.log("current dat: ", currentDate);
+                          console.log(new Date());
                           const previousDate =
                               index > 0 ? new Date(Messages[index - 1]?.MessageDate) : null;
           
@@ -180,7 +183,7 @@ const BroadcastChat = () => {
                             )}
                             {
                               element?.messageType == "Sent" ?
-                              <SentMessage data={element} index={index}/> :
+                              <SentMessage data={element} index={index} pungi={showDateLabel}/> :
                               element?.messageType == "Info" ?
                               <div className="date-label h-fit relative flex justify-center text-center bg-none w-full"> 
                                    <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-1" onClick={async () => {

@@ -1,13 +1,13 @@
 // import "./SentMessage.css";
 
 
-const SentMessage = ({data, index} : {data: any ; index: number}) => {
+const SentMessage = ({data, index , pungi} : {data: any ; index: number; pungi?: boolean}) => {
   console.log("Data: ", data);
   var date = new Date(data?.MessageDate);
   date.setTime(date.getTime() - (5.5 * 60 * 60 * 1000));
 
   return (
-    <div className="message sent" onClick={async () => {
+    <div className={`message sent ${pungi ? "relative after:content-[''] after:absolute after:w-0 after:h-0 after:border-solid" : ""}`} onClick={async () => {
       console.log("Clicked")
       if(confirm("Do you want to delete this message: "))
       // try {

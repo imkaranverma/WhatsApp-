@@ -141,13 +141,16 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 220px;
+    width: 240px;
   }
   
   .user-bar .status {
     display: block;
     font-size: 13px;
     font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     /* letter-spacing: 0; */
   }
   
@@ -207,7 +210,6 @@
     font-size: 12px;
     padding: 4px;
     padding-left: 8px;
-
     position: relative;
     margin: 2px 0;
     max-width: 85%;
@@ -215,13 +217,13 @@
     z-index: 0;
   }
   
-  .message:after {
+  /* .message:after {
     position: absolute;
     content: "";
     width: 0;
     height: 0;
     border-style: solid;
-  }
+  } */
   
   .metadata {
     display: inline-block;
@@ -456,6 +458,6 @@
       height: calc(100vh - 55px);
     }
     .conversation .conversation-container {
-      height: calc(100vh - 180px);
+      height: calc(100vh - 190px);
     }
   }

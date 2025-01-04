@@ -6,7 +6,7 @@ import { useWheel } from "react-use-gesture";
 // import "./styles.css";
 
 const Scroller = styled.div`
-  height: 100%;
+  height: 90%;
   overflow-x: hidden;
   overflow-y: auto;
 `;
