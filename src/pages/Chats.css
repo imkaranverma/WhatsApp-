@@ -103,7 +103,7 @@
   
   .user-bar .actions {
     float: right;
-    margin: 0 10px 0 20px;
+    margin: 0 0px 0 0px;
   }
   
   .user-bar .actions.more {
@@ -141,7 +141,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 240px;
+    width: 250px;
   }
   
   .user-bar .status {
@@ -300,7 +300,7 @@
   
   .message.sent {
     background: #d8fdd2;
-    border-radius: 5px 0px 5px 5px;
+    border-radius: 7px 7px 7px 7px;
     float: right;
     white-space: pre-wrap;
   }

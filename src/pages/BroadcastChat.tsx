@@ -140,12 +140,6 @@ const BroadcastChat = () => {
     .join(", ")
 }</span>
                 </div>
-                <div className="actions more">
-                  <i className="zmdi zmdi-more-vert" />
-                </div>
-                <div className="actions attachment">
-                  <i className="zmdi zmdi-attachment-alt" />
-                </div>
                 <div className="actions">
                 <BsThreeDotsVertical />
                 </div>
