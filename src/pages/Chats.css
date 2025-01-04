@@ -189,6 +189,7 @@
     /* overflow-y: none; */
     padding: 0 16px;
     margin-bottom: 5px;
+
   }
   
   .conversation .conversation-container:after {
@@ -202,8 +203,8 @@
   .message {
     color: #000;
     clear: both;
-    line-height: 11px;
-    font-size: 11px;
+    line-height: 12px;
+    font-size: 12px;
     padding: 4px;
     padding-left: 8px;
 
@@ -296,7 +297,7 @@
   }
   
   .message.sent {
-    background: #e1ffc7;
+    background: #d8fdd2;
     border-radius: 5px 0px 5px 5px;
     float: right;
     white-space: pre-wrap;

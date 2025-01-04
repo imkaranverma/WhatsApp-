@@ -128,7 +128,7 @@ const BroadcastChat = () => {
                 <div className="avatar">
                     
                   {/* <img src="" alt="Avatar" /> */}
-                  <Avatar  sx={{ bgcolor: "#DFE5E7" , margin: "auto" , width: "35px" , height: "35px" , padding: "0.3rem"}} src={broadcastItem}/>
+                  <Avatar  sx={{ bgcolor: "#DFE5E7" , margin: "auto" , width: "35px" , height: "35px" , padding: "0.45rem"}} src={broadcastItem}/>
                 </div>
                 <div className="name" onClick={() => Navigate("/broadcastinfo")}>
                   <span>{BroadcastName?.name}</span>
