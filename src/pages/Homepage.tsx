@@ -10,7 +10,8 @@ import status from "../assets/status.jpg"
 // import Battery from './Battery';
 import BroadcastChatItem from '../components/BroadcastChatItem'
 import { useEffect, useState } from 'react'
-
+import ElasticScroll from '../components/ElasticScroll'
+import { motion } from "framer-motion";
 
 // UserData;
 interface userInterface {
@@ -78,6 +79,13 @@ const usersWithUnreadMessages = data.filter((user: any) => user.unread> 0).lengt
 //   ))
 
   return (
+    <motion.div
+    key="page"
+    initial={{ y: "-20%", opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    exit={{ y: "20%", opacity: 0, transition: { duration: 0.1 } }}
+    transition={{ delay: 0, duration: 0.1 }}
+  >
     <>
           <div className="h-10">
 
@@ -93,6 +101,9 @@ const usersWithUnreadMessages = data.filter((user: any) => user.unread> 0).lengt
 {/* <Statusbar/> */}
       {/* </div> */}
      <Navbar/> 
+     <ElasticScroll>
+
+  
 <div className="h-[35rem] overflow-y-scroll">
     <video src={inshort} width={"100%"} autoPlay muted loop/>
 {
@@ -100,13 +111,14 @@ const usersWithUnreadMessages = data.filter((user: any) => user.unread> 0).lengt
 <BroadcastChatItem/>
 }
     {LocalData.map((element: userInterface, index: number) => (
-      <UserChatItem key={index} userData={element} index={index} />
+      <UserChatItem key={index} userData={element} index={index} type={'local'}/>
       ))}
     {Data.map((element: userInterface, index: number) => (
-      <UserChatItem key={index} userData={element} index={index} />
+      <UserChatItem key={index} userData={element} index={index} type={"api"}/>
       ))}
 
 </div>
+</ElasticScroll>
 
     <div className='absolute bottom-0 w-full bg-none pointer-events-none'>
       <div className='w-full flex justify-end items-end pr-3 flex flex-col gap-2'>
@@ -131,5 +143,6 @@ usersWithUnreadMessages != 0 &&
     </div>
      </div>
     </>
+    </motion.div>
   )
 }

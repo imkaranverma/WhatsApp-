@@ -18,7 +18,7 @@ interface userInterface {
     __v: string,
     _id: string,
 };
-const UserChatItem = ({userData , index} :{userData: userInterface; index: number}) => {
+const UserChatItem = ({userData , index, type} :{userData: userInterface; index: number, type: string}) => {
     const Navigate = useNavigate();
     // const Data: userInterface = {
     //     name: "Karan",
@@ -42,7 +42,7 @@ console.log("index:" , index)
     <>
 
 
-<div className='flex my-5 pl-2' onClick={() => {Navigate("/edituser" , {state: {userData: userData , index: index}})}}>
+<div className='flex my-5 pl-2' onClick={() => {Navigate("/edituser" , {state: {userData: userData , index: index, type: type}})}}>
     <div className={`flex justify-center m-0 w-[58.5px] ${userData?.story == "Seen" ? "border-spacing-0 border-[3px] border-[#d9ebdf] rounded-full" : userData?.story == "Unseen" ? "border-spacing-0 border-[3px] border-[#1EAA61] rounded-full" : ""}`}>
 <Avatar id="avatarIcon"  sx={{ bgcolor: "#DFE5E7" , margin: "auto", width: "42px", height: "42px"}} src={Iconsrc ? Iconsrc.toString() : undefined}/>
     </div>

@@ -8,10 +8,12 @@ import { IoMdArrowBack } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import status from "../assets/status.jpg"
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { format, isYesterday, isToday } from "date-fns"; 
 import React from "react";
 import broadcastItem from "../assets/broadcastIcon.png";
+import ElasticScroll from "../components/ElasticScroll";
+import { motion } from "framer-motion";
 
 const BroadcastChat = () => {
     const Navigate = useNavigate();
@@ -50,32 +52,39 @@ const BroadcastChat = () => {
     const BroadcastName = JSON.parse(localStorage.getItem("broadcastName") || "{}");
 
     const localUserList = JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
-    const [data , setData] = useState([]);
-    useEffect(() => {
+    // const [data , setData] = useState([]);
+    // useEffect(() => {
   
-      async function apiCall ()  {
-        try{
-          const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/list');
-          const json = await response.json();
-          // setData(json?.);
-          console.log("json: ", json?.data)
-          setData(json?.data);
-          if (!response.ok) {
-            throw new Error('Failed to load users.');
-          }
+    //   async function apiCall ()  {
+    //     try{
+    //       const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/list');
+    //       const json = await response.json();
+    //       // setData(json?.);
+    //       console.log("json: ", json?.data)
+    //       setData(json?.data);
+    //       if (!response.ok) {
+    //         throw new Error('Failed to load users.');
+    //       }
     
-          // alert('');
+    //       // alert('');
     
-        } catch(error) {
-    alert(error);
-        }
-      }
-      apiCall();
+    //     } catch(error) {
+    // alert(error);
+    //     }
+    //   }
+    //   apiCall();
   
-    }, [])
+    // }, [])
 
     console.log("message: ", Messages)
   return (
+    <motion.div
+    key="page"
+    initial={{ y: "100%", opacity: 0 }} // Start from below (down)
+    animate={{ y: 0, opacity: 1 }} // Move to the center
+    exit={{ y: "-100%", opacity: 0, transition: { duration: 0.1 } }} // Exit upwards (up)
+    transition={{ delay: 0, duration: 0.1 }} //
+  >
     <>
     <div className="h-7 fixed z-20">
 
@@ -110,9 +119,9 @@ const BroadcastChat = () => {
           </div>
           <div className="chat">
             <div className="chat-container">
-              <div className="user-bar" onClick={() => Navigate("/broadcastinfo")}>
+              <div className="user-bar" >
                 <div className="back" 
-                // onClick={() => Navigate(-1)}
+                onClick={() => Navigate(-1)}
                 >
                 <IoMdArrowBack />
                 </div>
@@ -121,10 +130,10 @@ const BroadcastChat = () => {
                   {/* <img src="" alt="Avatar" /> */}
                   <Avatar  sx={{ bgcolor: "#DFE5E7" , margin: "auto" , width: "35px" , height: "35px" , padding: "0.3rem"}} src={broadcastItem}/>
                 </div>
-                <div className="name">
+                <div className="name" onClick={() => Navigate("/broadcastinfo")}>
                   <span>{BroadcastName?.name}</span>
                   <span className="status">{
-  [...localUserList, ...data]
+  [...localUserList]
     .map((element: any) => element?.name)
     .filter((name) => name) // Ensure names are not null or undefined
     .join(", ")
@@ -141,6 +150,9 @@ const BroadcastChat = () => {
                 </div>
               </div>
               <div className="conversation">
+                <ElasticScroll>
+
+               
                 <div className="conversation-container">
                     {
                         Messages.map((element:any, index:any) => {
@@ -168,13 +180,41 @@ const BroadcastChat = () => {
                             )}
                             {
                               element?.messageType == "Sent" ?
-                              <SentMessage data={element} /> :
-                              <div className="date-label h-fit relative flex justify-center text-center bg-none w-full">
-                                   
-                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-1">
+                              <SentMessage data={element} index={index}/> :
+                              element?.messageType == "Info" ?
+                              <div className="date-label h-fit relative flex justify-center text-center bg-none w-full"> 
+                                   <span className="bg-white text-[0.70rem] text-gray-700 opacity-85 px-2 py-0 rounded-md my-1" onClick={async () => {
+      console.log("Clicked")
+      if(confirm("Do you want to delete this message: "))
+      {
+        const oldMessages = JSON.parse(localStorage?.getItem("broadcastMessages") || "[]");
+
+        if (oldMessages.length > 0 && oldMessages[index]) {
+
+          oldMessages.splice(index , 1);
+          localStorage.setItem('broadcastMessages', JSON.stringify(oldMessages));
+
+          
+          console.log("Updated Users Array: ", oldMessages);
+
+      } else {
+          // Handle the case where the index is invalid or user does not exist
+          alert("Invalid user index or no broadcastMessages found!");
+        }
+        console.log("key: ", JSON.parse(localStorage.getItem("broadcastMessages") || "[]"));
+        alert("Message Deleted Successfully!");
+      }
+
+
+
+    }}>
                                      {element?.message}
                                         </span>
                                 </div>
+                              :
+                              // <></>
+                              <img src={element?.name}/>
+                                   
                             }
                         </React.Fragment>
                             )
@@ -188,6 +228,7 @@ const BroadcastChat = () => {
                   {/* <SentMessage data="What happened last night?"/> */}
                   {/* <ReceivedMessage message="You were drunk."/> */}
                 </div>
+                </ElasticScroll>
                 {/* <form className="conversation-compose">
                   <div className="emoji">
                     <svg
@@ -238,6 +279,7 @@ const BroadcastChat = () => {
     </div>
   </div>
   </>
+  </motion.div>
   )
 }
 

@@ -12,7 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const EditUser = () => {
     const Navigate = useNavigate()
     const location = useLocation();
-    let { userData , index} = location.state;
+    let { userData , index , type} = location.state;
 console.log("state: " , userData , index);
       const defaultValues:any= {
               name: userData?.name,
@@ -30,49 +30,53 @@ console.log("state: " , userData , index);
 
         const onSubmit = async (data:any) => {
           console.log("Submitted Data:", data);
+if(type == "api"){
+  try {
+    const response = await fetch('https://whatsapp-backend-1707.onrender.com/users/edit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
 
-          try {
-            const response = await fetch('https://whatsapp-backend-1707.onrender.com/users/edit', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-              });
-  
-              if (!response.ok) {
-                throw new Error('Failed to edit user.');
-              }
-        
-              alert('User Edited successfully.');
-          Navigate("/");
-          } catch(error:any){
-               alert(error.message);
-          }
+      if (!response.ok) {
+        throw new Error('Failed to edit user.');
+      }
 
-          //Disable this below code after api
-          // const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-          // //  const updatedData = {...data, lastMessageDate: new Date(data?.lastMessageDate.$d.getTime() + (5.5 * 60 * 60 * 1000)) } ;
-          // //  console.log("updated data: ", updatedData)
-          // // Check if the index is valid and exists in the array
-          // if (existingUsers.length > 0 && existingUsers[index]) {
-          //   // Update the user at the given index with the new data
-          //   existingUsers[index] = data ;
+      alert('User Edited successfully.');
+  Navigate("/");
+  } catch(error:any){
+       alert(error.message);
+  }
+}
+      else {
+ //Disable this below code after api
+          const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+          //  const updatedData = {...data, lastMessageDate: new Date(data?.lastMessageDate.$d.getTime() + (5.5 * 60 * 60 * 1000)) } ;
+          //  console.log("updated data: ", updatedData)
+          // Check if the index is valid and exists in the array
+          if (existingUsers.length > 0 && existingUsers[index]) {
+            // Update the user at the given index with the new data
+            existingUsers[index] = data ;
             
-          //   existingUsers.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime());
-          //   console.log("existing user:", existingUsers , index)
-          //   // Save the updated users array back to local storage
-          //   localStorage.setItem('users', JSON.stringify(existingUsers));
+            existingUsers.sort((a:any, b:any) => new Date(b?.lastMessageDate).getTime() - new Date(a?.lastMessageDate).getTime());
+            console.log("existing user:", existingUsers , index)
+            // Save the updated users array back to local storage
+            localStorage.setItem('users', JSON.stringify(existingUsers));
         
-          //   // Log the updated users
-          //   console.log("Updated Users: ", existingUsers);
-          // } else {
-          //   // Handle the case where the index is invalid or user does not exist
-          //   alert("Invalid user index or no users found!");
-          // }
-          // console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
-          // alert("User Updated Successfully!");
+            // Log the updated users
+            console.log("Updated Users: ", existingUsers);
+          } else {
+            // Handle the case where the index is invalid or user does not exist
+            alert("Invalid user index or no users found!");
+          }
+          console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
+          alert("User Updated Successfully!");
           // Navigate("/");
+      }
+
+         
         };
         const methods = useForm({
           // resolver: yupResolver(transactionSchema),
@@ -200,42 +204,47 @@ console.log("state: " , userData , index);
           cursor: "pointer",
         }}
         onClick={async () => {
+if(type == "api"){
+  try {
+    const response = await fetch('https://whatsapp-backend-1707.onrender.com/users/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"_id" : userData?._id})
+      });
 
-          try {
-            const response = await fetch('https://whatsapp-backend-1707.onrender.com/users/delete', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({"_id" : userData?._id})
-              });
-  
-              if (!response.ok) {
-                throw new Error('Failed to delete user.');
-              }
+      if (!response.ok) {
+        throw new Error('Failed to delete user.');
+      }
+
+      alert('User Deleted successfully.');
+      Navigate("/");
+
+  } catch(error:any){
+       alert(error.message);
+  }
+}
         
-              alert('User Deleted successfully.');
-              Navigate("/");
-  
-          } catch(error:any){
-               alert(error.message);
-          }
+else {
+  const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+            if (existingUsers.length > 0 && existingUsers[index]) {
 
-            // const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-            // if (existingUsers.length > 0 && existingUsers[index]) {
-
-            //     existingUsers.splice(index , 1);
-            //     localStorage.setItem('users', JSON.stringify(existingUsers));
+                existingUsers.splice(index , 1);
+                localStorage.setItem('users', JSON.stringify(existingUsers));
     
                 
-            //     console.log("Updated Users Array: ", existingUsers);
+                console.log("Updated Users Array: ", existingUsers);
 
-            // } else {
-            //     // Handle the case where the index is invalid or user does not exist
-            //     alert("Invalid user index or no users found!");
-            //   }
-            //   console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
-            //   alert("User Deleted Successfully!");
+            } else {
+                // Handle the case where the index is invalid or user does not exist
+                alert("Invalid user index or no users found!");
+              }
+              console.log("key: ", JSON.parse(localStorage.getItem("users") || "[]"));
+              alert("User Deleted Successfully!");
+}
+
+          
         }}
       >
         Delete User

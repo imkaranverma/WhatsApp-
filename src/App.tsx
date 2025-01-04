@@ -10,6 +10,7 @@ import Battery from './pages/Battery';
 import Broadcast from './pages/Broadcast';
 import BroadcastChat from './pages/BroadcastChat';
 import BroadcastInfo from './pages/BroadcastInfo';
+import { AnimatePresence } from "framer-motion";
 // import { useEffect, useState } from 'react';
 
 function App() {
@@ -17,10 +18,13 @@ function App() {
   return (
 <GlobalConfiguration>
 <ThemeWrapper>
-
   <>
   <BrowserRouter>
-  <Routes>
+{/* <TransitionGroup>
+            <CSSTransition  timeout={2000} classNames="scroll"> */}
+              <AnimatePresence mode="wait">
+
+  <Routes location={location} key={location.pathname}>
     <Route path="/" element={<Homepage />} />
     <Route path="/adduser" element={<AddUser />} />
     <Route path="/edituser" element={<EditUser />} />
@@ -30,6 +34,9 @@ function App() {
     <Route path="/broadcastchat" element={<BroadcastChat />} />
     <Route path="/broadcastinfo" element={<BroadcastInfo />} />
   </Routes>
+              </AnimatePresence>
+    {/* </CSSTransition>
+          </TransitionGroup> */}
     </BrowserRouter>
     </>
 </ThemeWrapper>

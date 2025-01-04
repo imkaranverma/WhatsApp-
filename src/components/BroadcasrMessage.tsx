@@ -13,12 +13,44 @@ const BroadcastName = () => {
         // BroadcastName: "",
         // user: {
             message: "",
-            MessageDate: "",
+            MessageDate: new Date(new Date().getTime() + (5.5 * 60 * 60 * 1000)).toISOString(),
             messageType: "Sent",
             status: "Delivered"
            
         // }
   }
+
+  // const imageUpload = (e:any) => {
+  //   const file = e.target.files[0];
+  //   getBase64(file).then((base64:any) => {
+  //     // localStorage["fileBase64"] = base64;
+  //     messageMethods.setValue("message" , base64)
+  //     //console.debug("file stored",base64);
+  //   });
+
+  //   // var dataImage = localStorage.getItem("fileBase64");
+  //   // console.log(dataImage);
+  //   // var bannerImg = document.getElementById("tableBanner");
+  //   // console.log(bannerImg);
+  //   // bannerImg.src = "data:image/png;base64," + dataImage;
+  //   // document.body.style.background = `url(data:image/png;base64,${dataImage})`;
+  //   // x = (
+  //   //   <img
+  //   //     alt="no"
+  //   //     id="tableBanner"
+  //   //     src={"data:image/png;base64," + dataImage}
+  //   //   />
+  //   // );
+  // };
+  // const getBase64 = (file:any) => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => resolve(reader.result);
+  //     reader.onerror = (error) => reject(error);
+  //     reader.readAsDataURL(file);
+  //   });
+  // };
+
 
   const onMessageSubmit = async (data:any) => {
     console.log("Submitted Data:", data);   
@@ -64,6 +96,12 @@ const BroadcastName = () => {
   return (
     <div>
      <FormProvider methods={messageMethods} onSubmit={handleSubmit(onMessageSubmit)} >
+     {/* <input
+        type="file"
+        id="message"
+        name="message"
+        onChange={imageUpload}
+      /> */}
       <RHFTextField rows={5} sx={{ whiteSpace: "pre-wrap" }} multiline={true} dataId="message"  name='message' placeholder="Enter Message" label="Message"/>
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>

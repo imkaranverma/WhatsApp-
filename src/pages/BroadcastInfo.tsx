@@ -12,7 +12,7 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import status from "../assets/status.jpg"
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { motion } from "framer-motion";
 
 const BroadcastInfo = () => {
   const navigate = useNavigate();
@@ -25,6 +25,7 @@ const BroadcastInfo = () => {
   const BroadcastName = JSON.parse(localStorage.getItem("broadcastName") || "{}");
   const createdTime = new Date(new Date(BroadcastName?.createdTime).getTime() - (5.5 * 60 * 60 * 1000));
   const localUserList = JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
+ 
   const [data , setData] = useState([]);
   useEffect(() => {
 
@@ -51,8 +52,17 @@ const BroadcastInfo = () => {
 
   console.log("data: ", data);
   const users = data;
+
+  const numberOfUsers = localUserList.length + users.length;
     // const users = JSON.parse(localStorage.getItem("broadcastUserList") || "[]")
   return (
+    <motion.div
+    key="page"
+    initial={{ y: "100%", opacity: 0 }} // Start from below (down)
+    animate={{ y: 0, opacity: 1 }} // Move to the center
+    exit={{ y: "-100%", opacity: 0, transition: { duration: 0.1 } }} // Exit upwards (up)
+    transition={{ delay: 0, duration: 0.1 }} //
+  >
     <>
         <div className="h-8 fixed z-10">
 
@@ -95,7 +105,7 @@ const BroadcastInfo = () => {
           <Avatar src={broadcastItem} sx={{ bgcolor: "#DFE5E7" ,width: "6rem" , height: "6rem", padding: "1.2rem"}}/>
         </div>
         <div className='w-full text-center text-xl pt-3 pb-2'>{BroadcastName?.name}</div>
-        <div className='w-full text-center text-base text-gray-700 py-0'>Broadcast List - {users?.length} recipients</div>
+        <div className='w-full text-center text-base text-gray-700 py-0'>Broadcast List - {numberOfUsers} recipients</div>
         <div className='w-full text-center text-sm text-gray-700 pt-2 pb-5'><span className='bg-slate-100 w-fit px-2 py-1 rounded-md'>Created {createdTime.getDate().toString().padStart(2, "0") + "/" + (createdTime?.getMonth() + 1).toString().padStart(2, "0")  + "/" + createdTime.getFullYear().toString().slice(2) + ", " + createdTime.getHours().toString().padStart(2, "0") + ":" + createdTime.getMinutes().toString().padStart(2, "0")}</span></div>
 
       </div>
@@ -103,7 +113,7 @@ const BroadcastInfo = () => {
         <img  src={encryption}/>
         </div>
         <div className="bg-white drop-shadow-md mb-2">
-          <div className='w-full text-sm text-gray-500 font-medium pl-4 py-3 font-[#3b4a54]'>{users?.length} recipients</div>
+          <div className='w-full text-sm text-gray-500 font-medium pl-4 py-3 font-[#3b4a54]'>{numberOfUsers} recipients</div>
 <img src={recipients}/>
 
     {
@@ -145,6 +155,7 @@ const BroadcastInfo = () => {
         </div>
     </div>
     </>
+    </motion.div>
   )
 }
 

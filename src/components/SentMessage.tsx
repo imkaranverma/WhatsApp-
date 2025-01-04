@@ -1,35 +1,53 @@
 // import "./SentMessage.css";
 
 
-const SentMessage = ({data} : {data: any}) => {
+const SentMessage = ({data, index} : {data: any ; index: number}) => {
   console.log("Data: ", data);
   var date = new Date(data?.MessageDate);
   date.setTime(date.getTime() - (5.5 * 60 * 60 * 1000));
 
   return (
     <div className="message sent" onClick={async () => {
-      // event.stopPropagation(); // Prevent parent handlers from interfering
-      // console.log("Clicked");
       console.log("Clicked")
       if(confirm("Do you want to delete this message: "))
-      try {
-        const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastMessage/delete', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({"_id" : data?._id})
-          });
+      // try {
+      //   const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastMessage/delete', {
+      //       method: 'POST',
+      //       headers: {
+      //         'Content-Type': 'application/json'
+      //       },
+      //       body: JSON.stringify({"_id" : data?._id})
+      //     });
 
-          if (!response.ok) {
-            throw new Error('Failed to delete Message.');
-          }
+      //     if (!response.ok) {
+      //       throw new Error('Failed to delete Message.');
+      //     }
     
-          alert('Message successfully.');
+      //     alert('Message successfully.');
 
-      } catch(error:any){
-           alert(error.message);
+      // } catch(error:any){
+      //      alert(error.message);
+      // }
+      {
+        const oldMessages = JSON.parse(localStorage?.getItem("broadcastMessages") || "[]");
+
+        if (oldMessages.length > 0 && oldMessages[index]) {
+
+          oldMessages.splice(index , 1);
+          localStorage.setItem('broadcastMessages', JSON.stringify(oldMessages));
+
+          
+          console.log("Updated Users Array: ", oldMessages);
+
+      } else {
+          // Handle the case where the index is invalid or user does not exist
+          alert("Invalid user index or no broadcastMessages found!");
+        }
+        console.log("key: ", JSON.parse(localStorage.getItem("broadcastMessages") || "[]"));
+        alert("Message Deleted Successfully!");
       }
+
+
 
     }}>
     {data?.message}
