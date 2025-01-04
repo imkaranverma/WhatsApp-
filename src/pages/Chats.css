@@ -300,16 +300,16 @@
   
   .message.sent {
     background: #d8fdd2;
-    border-radius: 7px 7px 7px 7px;
+    border-radius: 9px 9px 9px 9px;
     float: right;
     white-space: pre-wrap;
   }
   
   .message.sent:after {
     border-width: 0px 0 10px 10px;
-    border-color: transparent transparent transparent #e1ffc7;
+    border-color: transparent transparent transparent #d8fdd2;
     top: 0;
-    right: -8px;
+    right: -4px;
   }
   
   /* Compose */
