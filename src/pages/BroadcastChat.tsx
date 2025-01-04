@@ -8,7 +8,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import status from "../assets/status.jpg"
 import { useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { format, isYesterday, isToday } from "date-fns"; 
 import React from "react";
 import broadcastItem from "../assets/broadcastIcon.png";
@@ -52,29 +52,29 @@ const BroadcastChat = () => {
     const BroadcastName = JSON.parse(localStorage.getItem("broadcastName") || "{}");
 
     const localUserList = JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
-    // const [data , setData] = useState([]);
-    // useEffect(() => {
+    const [data , setData] = useState([]);
+    useEffect(() => {
   
-    //   async function apiCall ()  {
-    //     try{
-    //       const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/list');
-    //       const json = await response.json();
-    //       // setData(json?.);
-    //       console.log("json: ", json?.data)
-    //       setData(json?.data);
-    //       if (!response.ok) {
-    //         throw new Error('Failed to load users.');
-    //       }
+      async function apiCall ()  {
+        try{
+          const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastUser/list');
+          const json = await response.json();
+          // setData(json?.);
+          console.log("json: ", json?.data)
+          setData(json?.data);
+          if (!response.ok) {
+            throw new Error('Failed to load users.');
+          }
     
-    //       // alert('');
+          // alert('');
     
-    //     } catch(error) {
-    // alert(error);
-    //     }
-    //   }
-    //   apiCall();
+        } catch(error) {
+    alert(error);
+        }
+      }
+      apiCall();
   
-    // }, [])
+    }, [])
 
     console.log("message: ", Messages)
   return (
@@ -133,7 +133,7 @@ const BroadcastChat = () => {
                 <div className="name" onClick={() => Navigate("/broadcastinfo")}>
                   <span>{BroadcastName?.name}</span>
                   <span className="status">{
-  [...localUserList]
+  [...localUserList, ...data]
     .map((element: any) => element?.name)
     .filter((name) => name) // Ensure names are not null or undefined
     .join(", ")
