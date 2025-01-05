@@ -5,9 +5,11 @@ import BroadcastName from '../components/BroadcastName';
 import BroadcasrMessage from '../components/BroadcasrMessage';
 import UserListLocalStorage from '../components/UserListLocalStorage';
 import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Broadcast = () => {
 
+  const Navigate = useNavigate();
     const imageUpload = (e:any) => {
         const file = e.target.files[0];
         getBase64(file).then((base64:any) => {
@@ -67,15 +69,15 @@ const Broadcast = () => {
             }
       
             alert('User created successfully.');
-
+Navigate("/");
         } catch(error:any){
  alert(error.message);
         }
 
 
-       const existingBroadcast:any =  JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
-        var updatedBroadcast:any = [...existingBroadcast , data];            
-        localStorage.setItem("broadcastUserList" , JSON.stringify(updatedBroadcast));
+      //  const existingBroadcast:any =  JSON.parse(localStorage.getItem("broadcastUserList") || "[]");
+      //   var updatedBroadcast:any = [...existingBroadcast , data];            
+      //   localStorage.setItem("broadcastUserList" , JSON.stringify(updatedBroadcast));
 
         // alert("Battery Changed Successfully!");
       };
