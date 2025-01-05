@@ -91,7 +91,7 @@ const BroadcastInfo = () => {
     </div>
     <div className="text-xl">
     <RevealOnScroll>
-      B2
+    {BroadcastName?.name}
       </RevealOnScroll>
     </div>
         </div>
@@ -120,7 +120,7 @@ const BroadcastInfo = () => {
         localUserList.map((element:any , index:any)=> (
             <BroadcastUserList userData={{
                 name: element?.name || "Unknown", 
-                message: element?.status || "wq", 
+                message: element?.status || "", 
                 icon: element?.icon , 
                 status: "None", 
                 unread: 0 , 
@@ -135,7 +135,7 @@ const BroadcastInfo = () => {
         users.map((element:any , index:any)=> (
             <BroadcastUserList userData={{
                 name: element?.name || "Unknown", 
-                message: element?.status || "wq", 
+                message: element?.status || "", 
                 icon: element?.icon , 
                 status: "None", 
                 unread: 0 , 
