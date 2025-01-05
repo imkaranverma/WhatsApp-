@@ -91,7 +91,9 @@ const BroadcastInfo = () => {
     </div>
     <div className="text-xl">
     <RevealOnScroll>
+      <div className="text-nowrap">
     {BroadcastName?.name}
+      </div>
       </RevealOnScroll>
     </div>
         </div>
