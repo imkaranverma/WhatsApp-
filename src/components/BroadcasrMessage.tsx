@@ -55,24 +55,24 @@ const BroadcastName = () => {
   const onMessageSubmit = async (data:any) => {
     console.log("Submitted Data:", data);   
     
-//     try {
-//       const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastMessage/create', {
-//           method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify(data)
-//         });
-
-//         if (!response.ok) {
-//           throw new Error('Failed to create Message.');
-//         }
+    try {
+      const response = await fetch('https://whatsapp-backend-1707.onrender.com/broadcastMessage/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+console.log(response);
+        // if (!response.ok) {
+        //   throw new Error('Failed to create Message.');
+        // }
   
-//         alert('Message created successfully.');
+        // alert('Message created successfully.');
 
-//     } catch(error:any){
+    } catch(error:any){
 // alert(error.message);
-//     }
+    }
 
 
     const existingMessages = JSON.parse(localStorage.getItem("broadcastMessages") || "[]");
